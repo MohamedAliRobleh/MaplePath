@@ -48,12 +48,13 @@ export default async function handler(req, res) {
     const data = req.body
     const rows = await sql`
       UPDATE profiles SET
-        langue = COALESCE(${data.langue}, langue),
-        prenom = COALESCE(${data.prenom}, prenom),
-        province = COALESCE(${data.province}, province),
-        priorites = COALESCE(${data.priorites}, priorites),
-        date_arrivee = COALESCE(${data.date_arrivee}, date_arrivee),
-        score_quiz = COALESCE(${data.score_quiz}, score_quiz),
+        langue = COALESCE(${data.langue ?? null}, langue),
+        prenom = COALESCE(${data.prenom ?? null}, prenom),
+        province = COALESCE(${data.province ?? null}, province),
+        priorites = COALESCE(${data.priorites ?? null}, priorites),
+        date_arrivee = COALESCE(${data.date_arrivee ?? null}, date_arrivee),
+        score_quiz = COALESCE(${data.score_quiz ?? null}, score_quiz),
+        phase_actuelle = COALESCE(${data.phase_actuelle ?? null}, phase_actuelle),
         updated_at = NOW()
       WHERE id = ${userId}
       RETURNING *

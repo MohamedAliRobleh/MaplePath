@@ -36,6 +36,9 @@ const resources = {
       checklist: {
         title: 'Ma Checklist', tasks: '{{done}}/{{total}} tâches', completed: '{{pct}}% complété',
         all: 'Tout', empty: 'Aucune tâche ici', emptyDesc: 'Cette phase est vide ou tout est complété !',
+        phaseComplete: 'Étape terminée !', nextPhase: 'Passer à {{phase}}',
+        allDone: '🍁 Parcours complet ! Bonne chance pour ta citoyenneté.',
+        validated: 'Étape validée !',
       },
       outils: { title: 'Ressources', subtitle: "Toutes les options pour bien s'établir" },
       quiz: { start: 'Commencer', practice: 'Mode pratique', exam: 'Mode examen', result: 'Résultat', score: 'Score : {{score}}/{{total}}', pass: 'Réussi !', fail: 'Continuez à étudier' },
@@ -76,6 +79,9 @@ const resources = {
       checklist: {
         title: 'My Checklist', tasks: '{{done}}/{{total}} tasks', completed: '{{pct}}% complete',
         all: 'All', empty: 'No tasks here', emptyDesc: 'This phase is empty or all done!',
+        phaseComplete: 'Phase complete!', nextPhase: 'Move to {{phase}}',
+        allDone: '🍁 Journey complete! Good luck with your citizenship.',
+        validated: 'Phase validated!',
       },
       outils: { title: 'Resources', subtitle: 'All options to settle in well' },
       quiz: { start: 'Start', practice: 'Practice Mode', exam: 'Exam Mode', result: 'Result', score: 'Score: {{score}}/{{total}}', pass: 'Passed!', fail: 'Keep studying' },
@@ -116,6 +122,9 @@ const resources = {
       checklist: {
         title: 'قائمتي', tasks: '{{done}}/{{total}} مهام', completed: 'اكتمل {{pct}}%',
         all: 'الكل', empty: 'لا توجد مهام هنا', emptyDesc: 'هذه المرحلة فارغة أو مكتملة!',
+        phaseComplete: 'المرحلة مكتملة!', nextPhase: 'الانتقال إلى {{phase}}',
+        allDone: '🍁 الرحلة مكتملة! حظاً موفقاً في الحصول على الجنسية.',
+        validated: 'تم التحقق من المرحلة!',
       },
       outils: { title: 'الموارد', subtitle: 'جميع الخيارات للاستقرار بشكل جيد' },
       quiz: { start: 'ابدأ', practice: 'وضع التدريب', exam: 'وضع الامتحان', result: 'النتيجة', score: 'النتيجة: {{score}}/{{total}}', pass: 'نجحت!', fail: 'واصل الدراسة' },
@@ -156,6 +165,9 @@ const resources = {
       checklist: {
         title: 'Mi Lista', tasks: '{{done}}/{{total}} tareas', completed: '{{pct}}% completado',
         all: 'Todo', empty: 'Sin tareas aquí', emptyDesc: '¡Esta fase está vacía o todo completado!',
+        phaseComplete: '¡Fase completada!', nextPhase: 'Pasar a {{phase}}',
+        allDone: '🍁 ¡Recorrido completo! Buena suerte con tu ciudadanía.',
+        validated: '¡Fase validada!',
       },
       outils: { title: 'Recursos', subtitle: 'Todas las opciones para instalarse bien' },
       quiz: { start: 'Empezar', practice: 'Modo práctica', exam: 'Modo examen', result: 'Resultado', score: 'Puntuación: {{score}}/{{total}}', pass: '¡Aprobado!', fail: 'Sigue estudiando' },

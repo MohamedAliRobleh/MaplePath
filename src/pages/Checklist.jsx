@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ExternalLink, Plus } from 'lucide-react'
+import { ExternalLink, Plus, CheckCircle, ChevronRight } from 'lucide-react'
 import { useAuth } from '@clerk/clerk-react'
 import { useTranslation } from 'react-i18next'
 import useAppStore from '../store/useAppStore'
@@ -10,10 +10,12 @@ import { phases, taskCategories } from '../data/tasks'
 
 export default function Checklist() {
   const { t } = useTranslation()
-  const { tasks, toggleTask, profile } = useAppStore()
+  const { tasks, toggleTask, profile, updateProfile } = useAppStore()
   const { getToken } = useAuth()
   const [activePhase, setActivePhase] = useState(profile?.phase_actuelle ?? 1)
   const [activeCategory, setActiveCategory] = useState('all')
+  const [validating, setValidating] = useState(false)
+  const [validated, setValidated] = useState(false)
 
   const phaseTasks = tasks.filter(t => t.phase === activePhase)
   const filtered = activeCategory === 'all'
@@ -23,6 +25,8 @@ export default function Checklist() {
   const pct = phaseTasks.length ? Math.round((done / phaseTasks.length) * 100) : 0
 
   const usedCategories = [...new Set(phaseTasks.map(t => t.categorie).filter(Boolean))]
+  const nextPhase = phases.find(p => p.id === activePhase + 1)
+  const isComplete = pct === 100 && phaseTasks.length > 0
 
   async function handleToggle(taskId) {
     const task = tasks.find(t => t.id === taskId)
@@ -35,6 +39,31 @@ export default function Checklist() {
         body: JSON.stringify({ id: taskId, complete: !task.complete }),
       })
     } catch { toggleTask(taskId) }
+  }
+
+  async function handleValidatePhase() {
+    if (!nextPhase || validating) return
+    setValidating(true)
+    const newPhaseId = nextPhase.id
+    updateProfile({ phase_actuelle: newPhaseId })
+    try {
+      const token = await getToken()
+      await fetch('/api/profile', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ phase_actuelle: newPhaseId }),
+      })
+      setValidated(true)
+      setTimeout(() => {
+        setActivePhase(newPhaseId)
+        setActiveCategory('all')
+        setValidating(false)
+        setValidated(false)
+      }, 900)
+    } catch {
+      updateProfile({ phase_actuelle: activePhase })
+      setValidating(false)
+    }
   }
 
   return (
@@ -67,6 +96,65 @@ export default function Checklist() {
         </div>
         <ProgressBar value={done} max={phaseTasks.length || 1} />
       </div>
+
+      {/* Phase complete — validation card */}
+      <AnimatePresence>
+        {isComplete && (
+          <motion.div
+            key="phase-complete"
+            initial={{ opacity: 0, y: 16, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -8, scale: 0.97 }}
+            transition={{ type: 'spring', stiffness: 320, damping: 26 }}
+            className="relative overflow-hidden rounded-3xl mb-4 p-5"
+            style={{ background: 'linear-gradient(135deg, #FFD600 0%, #FFE033 60%, #FFF0A0 100%)' }}
+          >
+            {/* decorative maple leaf */}
+            <div className="pointer-events-none absolute -right-3 -top-3 text-[7rem] leading-none opacity-[0.08] select-none">
+              🍁
+            </div>
+
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-12 h-12 bg-white/40 backdrop-blur-sm rounded-2xl flex items-center justify-center flex-shrink-0 shadow-sm">
+                <CheckCircle size={24} className="text-brand-900" strokeWidth={2.5} />
+              </div>
+              <div>
+                <p className="font-display font-bold text-brand-900 text-base leading-tight">
+                  {t('checklist.phaseComplete')}
+                </p>
+                <p className="text-xs text-brand-900/60 mt-0.5">
+                  {phases.find(p => p.id === activePhase)?.icon}{' '}
+                  {phases.find(p => p.id === activePhase)?.label}
+                  {' · '}{phaseTasks.length} tâches
+                </p>
+              </div>
+            </div>
+
+            {nextPhase ? (
+              <button
+                onClick={handleValidatePhase}
+                disabled={validating}
+                className="w-full bg-gray-900 text-white font-display font-bold text-sm py-3.5 rounded-2xl flex items-center justify-center gap-2 shadow-lg active:scale-[0.98] transition-all disabled:opacity-60"
+              >
+                {validated ? (
+                  <span>✅ {t('checklist.validated')}</span>
+                ) : validating ? (
+                  <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                ) : (
+                  <>
+                    <span>{nextPhase.icon} {t('checklist.nextPhase', { phase: nextPhase.label })}</span>
+                    <ChevronRight size={16} strokeWidth={2.5} />
+                  </>
+                )}
+              </button>
+            ) : (
+              <p className="text-center font-display font-bold text-brand-900 text-sm">
+                {t('checklist.allDone')}
+              </p>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Category filters */}
       {usedCategories.length > 1 && (
