@@ -7,7 +7,7 @@ import { useAuth } from '@clerk/clerk-react'
 
 export default function TaskList() {
   const { t } = useTranslation()
-  const { tasks, toggleTask } = useAppStore()
+  const { tasks, toggleTask, profile } = useAppStore()
   const { getToken } = useAuth()
 
   async function handleToggle(taskId) {
@@ -23,9 +23,12 @@ export default function TaskList() {
     } catch { toggleTask(taskId) }
   }
 
-  const urgent = tasks.filter(t => t.priorite === 'urgent' && !t.complete)
-  const week   = tasks.filter(t => t.priorite === 'normal' && !t.complete && (t.jour_cible || 0) <= 7)
-  const month  = tasks.filter(t => !t.complete && (t.jour_cible || 0) > 7).slice(0, 5)
+  const currentPhase = profile?.phase_actuelle ?? 1
+  const phaseTasks = tasks.filter(t => t.phase === currentPhase)
+
+  const urgent = phaseTasks.filter(t => t.priorite === 'urgent' && !t.complete)
+  const week   = phaseTasks.filter(t => t.priorite === 'normal' && !t.complete && (t.jour_cible || 0) <= 7)
+  const month  = phaseTasks.filter(t => !t.complete && (t.jour_cible || 0) > 7).slice(0, 5)
 
   function TaskItem({ task, index }) {
     return (

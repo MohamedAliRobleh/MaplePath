@@ -8,11 +8,13 @@ import { phases } from '../../data/tasks'
 
 export default function HeroCard() {
   const { t } = useTranslation()
-  const { profile, getUrgentTasks, getCompletionRate } = useAppStore()
+  const { profile, tasks } = useAppStore()
   const navigate = useNavigate()
-  const urgent = getUrgentTasks()
-  const pct = getCompletionRate()
-  const phase = phases.find(p => p.id === (profile?.phase_actuelle || 1))
+  const currentPhase = profile?.phase_actuelle ?? 1
+  const phaseTasks = Array.isArray(tasks) ? tasks.filter(t => t.phase === currentPhase) : []
+  const pct = phaseTasks.length ? Math.round((phaseTasks.filter(t => t.complete).length / phaseTasks.length) * 100) : 0
+  const urgent = phaseTasks.filter(t => t.priorite === 'urgent' && !t.complete)
+  const phase = phases.find(p => p.id === currentPhase)
 
   return (
     <motion.div
