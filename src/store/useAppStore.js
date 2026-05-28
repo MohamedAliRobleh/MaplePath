@@ -53,6 +53,11 @@ const useAppStore = create(
         tasks: state.tasks,
         langue: state.langue,
       }),
+      merge: (persisted, current) => ({
+        ...current,
+        ...persisted,
+        tasks: Array.isArray(persisted?.tasks) ? persisted.tasks : [],
+      }),
     }
   )
 )
