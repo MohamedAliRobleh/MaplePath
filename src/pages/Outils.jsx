@@ -1,129 +1,195 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ExternalLink, ChevronDown, ChevronUp } from 'lucide-react'
-import Card from '../components/ui/Card'
 import Badge from '../components/ui/Badge'
-import { banques, formulairesIRCC, coursLangue, aideGouvernementale } from '../data/ressources'
+import {
+  carteSim, banques, logement, emploi,
+  medecin, assurances, formulairesIRCC, coursLangue, aideGouvernementale,
+} from '../data/ressources'
 
-function Section({ title, icon, children }) {
-  const [open, setOpen] = useState(true)
+function Section({ title, icon, count, children, defaultOpen = false }) {
+  const [open, setOpen] = useState(defaultOpen)
   return (
-    <div className="mb-4">
-      <button onClick={() => setOpen(o => !o)} className="w-full flex items-center justify-between mb-2 px-1">
-        <div className="flex items-center gap-2">
-          <span className="text-xl">{icon}</span>
-          <h3 className="font-display font-bold text-base text-gray-900">{title}</h3>
+    <div className="mb-3">
+      <button
+        onClick={() => setOpen(o => !o)}
+        className="w-full flex items-center justify-between px-4 py-3 bg-white rounded-3xl border border-black/5 shadow-card"
+      >
+        <div className="flex items-center gap-3">
+          <span className="text-2xl">{icon}</span>
+          <div className="text-left">
+            <p className="font-display font-bold text-sm text-gray-900">{title}</p>
+            <p className="text-xs text-gray-400">{count} options disponibles</p>
+          </div>
         </div>
-        {open ? <ChevronUp size={18} className="text-gray-400" /> : <ChevronDown size={18} className="text-gray-400" />}
+        {open
+          ? <ChevronUp size={18} className="text-gray-400 flex-shrink-0" />
+          : <ChevronDown size={18} className="text-gray-400 flex-shrink-0" />}
       </button>
-      {open && <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>{children}</motion.div>}
+      {open && (
+        <motion.div
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mt-2 flex flex-col gap-2"
+        >
+          {children}
+        </motion.div>
+      )}
+    </div>
+  )
+}
+
+function ResourceCard({ nom, description, prix, avantages, badge, lien, programme, type }) {
+  return (
+    <div className="bg-white rounded-3xl border border-black/5 shadow-card p-4">
+      <div className="flex items-start justify-between mb-2">
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2 flex-wrap">
+            <p className="font-display font-bold text-sm text-gray-900">{nom}</p>
+            {badge && (
+              <span className="text-[10px] font-semibold bg-brand-50 text-brand-700 px-2 py-0.5 rounded-full whitespace-nowrap">
+                {badge}
+              </span>
+            )}
+          </div>
+          <p className="text-xs text-gray-500 mt-0.5">{description || programme || type}</p>
+          {prix && <p className="text-xs font-semibold text-green-600 mt-1">{prix}</p>}
+        </div>
+        <a
+          href={lien}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex-shrink-0 ml-3 flex items-center gap-1.5 bg-gray-900 text-white text-xs font-semibold px-3 py-1.5 rounded-full hover:bg-gray-700 transition-colors"
+        >
+          Voir <ExternalLink size={11} />
+        </a>
+      </div>
+      {avantages?.length > 0 && (
+        <div className="flex flex-wrap gap-1 mt-2">
+          {avantages.map((a, i) => (
+            <span key={i} className="text-[10px] bg-gray-50 text-gray-600 border border-gray-100 px-2 py-0.5 rounded-full">
+              {a}
+            </span>
+          ))}
+        </div>
+      )}
     </div>
   )
 }
 
 export default function Outils() {
   return (
-    <div className="px-4 py-4">
-      <h2 className="font-display font-bold text-2xl text-gray-900 mb-6">Centre de ressources</h2>
+    <div className="px-4 py-4 pb-6">
+      <h2 className="font-display font-bold text-2xl text-gray-900 mb-1">Ressources</h2>
+      <p className="text-sm text-gray-500 mb-5">Toutes les options pour bien s'établir</p>
 
-      <Section title="Banques pour Nouveaux Arrivants" icon="🏦">
-        <div className="flex flex-col gap-3">
-          {banques.map(b => (
-            <Card key={b.nom}>
-              <div className="flex items-start justify-between mb-2">
-                <div>
-                  <p className="font-display font-bold text-sm text-gray-900">{b.nom}</p>
-                  <p className="text-xs text-gray-500">{b.programme}</p>
-                </div>
-                <a href={b.lien} target="_blank" rel="noopener noreferrer" className="p-1.5 hover:bg-gray-100 rounded-full">
-                  <ExternalLink size={14} className="text-gray-400" />
-                </a>
-              </div>
-              <div className="flex flex-wrap gap-1">
-                {b.avantages.map((a, i) => <Badge key={i} variant="info">{a}</Badge>)}
-              </div>
-            </Card>
-          ))}
-        </div>
+      <Section title="Carte SIM" icon="📱" count={carteSim.length}>
+        {carteSim.map(item => <ResourceCard key={item.nom} {...item} />)}
       </Section>
 
-      <Section title="Cours de Langue Gratuits" icon="🗣️">
-        <div className="flex flex-col gap-3">
-          {coursLangue.map(c => (
-            <Card key={c.nom}>
-              <div className="flex items-start justify-between">
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-1">
-                    <p className="font-display font-semibold text-sm text-gray-900">{c.nom}</p>
-                    {c.gratuit && <Badge variant="success">Gratuit</Badge>}
-                  </div>
-                  <p className="text-xs text-gray-500">{c.description}</p>
-                </div>
-                <a href={c.lien} target="_blank" rel="noopener noreferrer" className="p-1.5 hover:bg-gray-100 rounded-full flex-shrink-0">
-                  <ExternalLink size={14} className="text-gray-400" />
-                </a>
-              </div>
-            </Card>
-          ))}
-        </div>
+      <Section title="Banques pour Nouveaux Arrivants" icon="🏦" count={banques.length} defaultOpen>
+        {banques.map(item => <ResourceCard key={item.nom} {...item} />)}
       </Section>
 
-      <Section title="Aide Gouvernementale" icon="🍁">
-        <div className="flex flex-col gap-3">
-          {aideGouvernementale.map(a => (
-            <Card key={a.nom}>
-              <div className="flex items-start justify-between">
-                <div className="flex-1">
-                  <p className="font-display font-semibold text-sm text-gray-900 mb-1">{a.nom}</p>
-                  <p className="text-xs text-gray-500">{a.description}</p>
-                </div>
-                <a href={a.lien} target="_blank" rel="noopener noreferrer" className="p-1.5 hover:bg-gray-100 rounded-full flex-shrink-0">
-                  <ExternalLink size={14} className="text-gray-400" />
-                </a>
-              </div>
-            </Card>
-          ))}
-        </div>
+      <Section title="Trouver un Logement" icon="🏠" count={logement.length}>
+        {logement.map(item => <ResourceCard key={item.nom} {...item} />)}
       </Section>
 
-      <Section title="Formulaires IRCC" icon="📄">
+      <Section title="Trouver un Emploi" icon="💼" count={emploi.length}>
+        {emploi.map(item => <ResourceCard key={item.nom} {...item} />)}
+      </Section>
+
+      <Section title="Trouver un Médecin" icon="🏥" count={medecin.length}>
         <div className="flex flex-col gap-2">
-          {formulairesIRCC.map(f => (
-            <Card key={f.code}>
-              <div className="flex items-center gap-3">
-                <Badge variant="brand">{f.code}</Badge>
-                <p className="flex-1 text-sm text-gray-700">{f.nom}</p>
-                <a href={f.lien} target="_blank" rel="noopener noreferrer" className="p-1.5 hover:bg-gray-100 rounded-full">
-                  <ExternalLink size={14} className="text-gray-400" />
-                </a>
+          {medecin.map(item => (
+            <a
+              key={item.prov}
+              href={item.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-between p-4 bg-white rounded-3xl border border-black/5 shadow-card"
+            >
+              <div>
+                <p className="text-sm font-display font-semibold text-gray-900">{item.prov}</p>
+                <p className="text-xs text-gray-500 mt-0.5">{item.desc}</p>
+                <p className="text-xs text-brand-600 font-medium mt-0.5">{item.label}</p>
               </div>
-            </Card>
+              <ExternalLink size={14} className="text-gray-400 flex-shrink-0 ml-3" />
+            </a>
           ))}
         </div>
       </Section>
 
-      <Section title="Trouver un Médecin" icon="🏥">
-        <Card>
-          <p className="font-display font-semibold text-sm text-gray-900 mb-2">Outil de recherche provinciale</p>
-          <p className="text-xs text-gray-500 mb-3">Chaque province a son propre portail pour trouver un médecin acceptant de nouveaux patients.</p>
-          <div className="flex flex-col gap-2">
-            {[
-              { prov: 'Ontario', url: 'https://health811.ontario.ca', label: 'Health811.ontario.ca' },
-              { prov: 'Québec', url: 'https://www.quebec.ca/sante/trouver-une-ressource/guichet-acces-medecin-famille', label: 'GAMF Québec' },
-              { prov: 'C.-B.', url: 'https://www.healthlinkbc.ca', label: 'HealthLink BC' },
-            ].map(item => (
-              <a key={item.prov} href={item.url} target="_blank" rel="noopener noreferrer"
-                className="flex items-center justify-between p-3 bg-gray-50 rounded-2xl"
-              >
-                <div>
-                  <p className="text-sm font-medium text-gray-900">{item.prov}</p>
-                  <p className="text-xs text-gray-500">{item.label}</p>
+      <Section title="Assurances" icon="🛡️" count={assurances.length}>
+        {assurances.map(item => <ResourceCard key={item.nom} {...item} />)}
+      </Section>
+
+      <Section title="Cours de Langue" icon="🗣️" count={coursLangue.length}>
+        {coursLangue.map(c => (
+          <div key={c.nom} className="bg-white rounded-3xl border border-black/5 shadow-card p-4">
+            <div className="flex items-start justify-between">
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 mb-1">
+                  <p className="font-display font-semibold text-sm text-gray-900">{c.nom}</p>
+                  {c.gratuit
+                    ? <span className="text-[10px] font-semibold bg-green-50 text-green-700 px-2 py-0.5 rounded-full">Gratuit</span>
+                    : <span className="text-[10px] font-semibold bg-gray-50 text-gray-500 px-2 py-0.5 rounded-full">Payant</span>}
                 </div>
+                <p className="text-xs text-gray-500">{c.description}</p>
+              </div>
+              <a
+                href={c.lien}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-shrink-0 ml-3 flex items-center gap-1.5 bg-gray-900 text-white text-xs font-semibold px-3 py-1.5 rounded-full hover:bg-gray-700 transition-colors"
+              >
+                Voir <ExternalLink size={11} />
+              </a>
+            </div>
+          </div>
+        ))}
+      </Section>
+
+      <Section title="Aide Gouvernementale" icon="🍁" count={aideGouvernementale.length}>
+        {aideGouvernementale.map(a => (
+          <div key={a.nom} className="bg-white rounded-3xl border border-black/5 shadow-card p-4">
+            <div className="flex items-start justify-between gap-3">
+              <div className="flex-1 min-w-0">
+                <p className="font-display font-semibold text-sm text-gray-900 mb-1">{a.nom}</p>
+                <p className="text-xs text-gray-500">{a.description}</p>
+              </div>
+              <a
+                href={a.lien}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-shrink-0 flex items-center gap-1.5 bg-gray-900 text-white text-xs font-semibold px-3 py-1.5 rounded-full hover:bg-gray-700 transition-colors"
+              >
+                Voir <ExternalLink size={11} />
+              </a>
+            </div>
+          </div>
+        ))}
+      </Section>
+
+      <Section title="Formulaires IRCC" icon="📄" count={formulairesIRCC.length}>
+        {formulairesIRCC.map(f => (
+          <div key={f.code} className="bg-white rounded-3xl border border-black/5 shadow-card p-4">
+            <div className="flex items-center gap-3">
+              <span className="flex-shrink-0 text-xs font-bold bg-brand-50 text-brand-700 px-2.5 py-1 rounded-full">
+                {f.code}
+              </span>
+              <p className="flex-1 text-sm text-gray-700">{f.nom}</p>
+              <a
+                href={f.lien}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-shrink-0 p-1.5 hover:bg-gray-100 rounded-full"
+              >
                 <ExternalLink size={14} className="text-gray-400" />
               </a>
-            ))}
+            </div>
           </div>
-        </Card>
+        ))}
       </Section>
     </div>
   )
