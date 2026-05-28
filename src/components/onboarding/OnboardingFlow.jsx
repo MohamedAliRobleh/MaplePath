@@ -4,12 +4,11 @@ import { ChevronLeft } from 'lucide-react'
 import SondageProgress from './SondageProgress'
 import StepLangue from './steps/StepLangue'
 import StepTypeImmigrant from './steps/StepTypeImmigrant'
-import StepProvince from './steps/StepProvince'
 import StepEtape from './steps/StepEtape'
 import StepFamille from './steps/StepFamille'
 import StepPriorites from './steps/StepPriorites'
 
-const STEPS = [StepLangue, StepTypeImmigrant, StepProvince, StepEtape, StepFamille, StepPriorites]
+const STEPS = [StepLangue, StepTypeImmigrant, StepEtape, StepFamille, StepPriorites]
 const TOTAL = STEPS.length
 
 const pageVariants = {

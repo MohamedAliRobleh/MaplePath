@@ -33,6 +33,7 @@ export default function Onboarding() {
       const token = await getToken()
       const profileData = {
         ...onboardingAnswers,
+        province: 'ON',
         onboarding_done: true,
         phase_actuelle: getPhaseActuelle(onboardingAnswers.etape_parcours, onboardingAnswers.type_immigrant),
       }

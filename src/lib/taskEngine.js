@@ -1,41 +1,17 @@
-// Sources: IRCC canada.ca, Service Canada, FCAC, ministères provinciaux
+// Sources: IRCC canada.ca, Service Canada, FCAC, Ontario.ca
+// Province : Ontario uniquement pour le moment
 
-const SANTE_PROV = {
-  ON: { nom: 'OHIP',                   attente: '3 mois',  lien: 'https://www.ontario.ca/fr/page/ohip' },
-  QC: { nom: 'RAMQ',                   attente: '3 mois',  lien: 'https://www.ramq.gouv.qc.ca' },
-  BC: { nom: 'MSP Colombie-Brit.',      attente: '3 mois',  lien: 'https://www2.gov.bc.ca/gov/content/health/health-drug-coverage/msp' },
-  AB: { nom: 'AHCIP Alberta',           attente: '0 mois',  lien: 'https://www.alberta.ca/ahcip' },
-  MB: { nom: 'Assurance-santé Manitoba',attente: '3 mois',  lien: 'https://www.gov.mb.ca/health/mhsip/' },
-  SK: { nom: 'SK Health Coverage',      attente: '3 mois',  lien: 'https://www.ehealthsask.ca' },
-  NS: { nom: 'MSI Nouvelle-Écosse',     attente: '0 mois',  lien: 'https://novascotia.ca/dhw/msi/' },
-  NB: { nom: 'Medicare Nouveau-Brunswick', attente: '3 mois', lien: 'https://www2.gnb.ca/content/gnb/fr/ministeres/sante/services-aux-neouveaux-arrivants.html' },
-  NL: { nom: 'MCP Terre-Neuve',        attente: '0 mois',  lien: 'https://www.gov.nl.ca/hcs/mcp/' },
-  PE: { nom: "PEI Health Card",         attente: '3 mois',  lien: 'https://www.princeedwardisland.ca/en/information/health-pei/pei-health-card' },
-}
-
-const PERMIS_PROV = {
-  ON: { nom: 'DriveTest Ontario',       lien: 'https://drivetest.ca' },
-  QC: { nom: 'SAAQ Québec',             lien: 'https://saaq.gouv.qc.ca' },
-  BC: { nom: 'ICBC Colombie-Brit.',     lien: 'https://www.icbc.com' },
-  AB: { nom: 'Service Alberta',         lien: 'https://www.alberta.ca/get-drivers-licence' },
-  MB: { nom: 'MPI Manitoba',            lien: 'https://www.mpi.mb.ca' },
-  SK: { nom: 'SGI Saskatchewan',        lien: 'https://www.sgi.sk.ca' },
-  NS: { nom: "Access Nova Scotia",      lien: 'https://novascotia.ca/access/' },
-  NB: { nom: 'Service NB',             lien: 'https://www2.gnb.ca/content/gnb/fr/services/services_renderer.10171.html' },
-}
+const SANTE = { nom: 'OHIP', attente: '3 mois', lien: 'https://www.ontario.ca/fr/page/ohip' }
+const PERMIS = { nom: 'DriveTest Ontario', lien: 'https://drivetest.ca' }
 
 export function generateTasks(profile) {
   const tasks = []
   const {
     type_immigrant = 'rp_economique',
-    province = 'ON',
     etape_parcours = 'semaine_1',
     situation_fam = 'seul',
     priorites = [],
   } = profile
-
-  const sante   = SANTE_PROV[province]  || { nom: 'Assurance santé provinciale', attente: '3 mois', lien: 'https://www.canada.ca/fr/sante-canada.html' }
-  const permis  = PERMIS_PROV[province] || { nom: 'Ministère des transports provincial', lien: 'https://www.canada.ca/fr/immigration-refugies-citoyennete.html' }
 
   const notArrived  = etape_parcours === 'pre_arrivee' || type_immigrant === 'pre_arrivee'
   const isRefugee   = type_immigrant === 'refugie_gov' || type_immigrant === 'refugie_prive'
@@ -73,7 +49,7 @@ export function generateTasks(profile) {
         {
           titre: 'Souscrire une assurance santé privée de voyage',
           categorie: 'sante', priorite: 'urgent', jour_cible: -14, phase: 0,
-          description: `${sante.nom} a un délai de carence${sante.attente !== '0 mois' ? ` de ${sante.attente}` : ' nul'} en ${province}. Prends une assurance privée pour couvrir les 3 premiers mois (urgences, hospitalisation). Coût : 50–200 $/mois.`,
+          description: `OHIP a un délai de carence de 3 mois en Ontario. Prends une assurance privée pour couvrir les 3 premiers mois (urgences, hospitalisation). Coût : 50–200 $/mois.`,
           lien_officiel: 'https://www.canada.ca/fr/immigration-refugies-citoyennete/services/nouveau-immigrant/preparer-arrivee.html',
         },
         {
@@ -160,7 +136,7 @@ export function generateTasks(profile) {
     tasks.push(
       { titre: 'Franchir les douanes et activer ton statut', categorie: 'documents', priorite: 'normal', jour_cible: 0, phase: 1, description: 'À faire à l\'arrivée : présente ton COPR + passeport à l\'ASFC. Un agent tamponnera ton COPR.', organisme: 'ASFC', lien_officiel: 'https://www.cbsa-asfc.gc.ca/newcomers-nouveaux/menu-fra.html' },
       { titre: 'Acheter une carte SIM canadienne', categorie: 'installation', priorite: 'normal', jour_cible: 1, phase: 1, description: 'Koodo, Public Mobile ou Fido — plans prépayés dès 15 $/mois sans contrat. Comparatif dans la section Outils.', lien_officiel: 'https://www.koodomobile.com' },
-      { titre: `S'inscrire à ${sante.nom}`, categorie: 'sante', priorite: 'normal', jour_cible: 1, phase: 1, description: `Inscris-toi dès l'arrivée même si le délai de carence est ${sante.attente}. Garde tous tes reçus médicaux pendant la période d'attente.`, lien_officiel: sante.lien },
+      { titre: `S'inscrire à ${SANTE.nom}`, categorie: 'sante', priorite: 'normal', jour_cible: 1, phase: 1, description: `Inscris-toi dès l'arrivée même si le délai de carence est ${SANTE.attente}. Garde tous tes reçus médicaux pendant la période d'attente.`, lien_officiel: SANTE.lien },
       { titre: 'Obtenir ton NAS (Numéro d\'Assurance Sociale)', categorie: 'documents', priorite: 'normal', jour_cible: 2, phase: 1, description: 'Bureau Service Canada : COPR/visa + passeport. Gratuit, immédiat. Requis pour travailler et recevoir des prestations.', organisme: 'Service Canada', formulaire: 'SIN Application', lien_officiel: 'https://www.canada.ca/fr/emploi-developpement-social/services/numero-assurance-sociale.html' },
       { titre: 'Ouvrir un compte bancaire canadien', categorie: 'banque', priorite: 'normal', jour_cible: 2, phase: 1, description: 'TD, RBC, Scotiabank, BMO, CIBC et Desjardins ont des programmes Newcomers sans historique de crédit. Compare les options dans la section Outils.', lien_officiel: 'https://www.canada.ca/fr/agence-consommation-matiere-financiere/sujets/produits-services-bancaires/comptes-bancaires/comptes-bancaires-nouveaux-arrivants.html' },
     )
@@ -186,11 +162,11 @@ export function generateTasks(profile) {
           lien_officiel: 'https://www.koodomobile.com',
         },
         {
-          titre: `S'inscrire à ${sante.nom}`,
+          titre: `S'inscrire à ${SANTE.nom}`,
           categorie: 'sante', priorite: 'urgent', jour_cible: 1, phase: 1,
-          description: `Inscris-toi dès le 1er jour même si le délai de carence est ${sante.attente}. ${sante.attente !== '0 mois' ? `Garde une assurance privée pendant ces ${sante.attente} et conserve tes reçus.` : 'Tu es couvert immédiatement en Alberta et Nouvelle-Écosse.'}`,
-          organisme: sante.nom,
-          lien_officiel: sante.lien,
+          description: `Inscris-toi dès le 1er jour même si le délai de carence est ${SANTE.attente}. ${SANTE.attente !== '0 mois' ? `Garde une assurance privée pendant ces ${SANTE.attente} et conserve tes reçus.` : 'Tu es couvert immédiatement en Alberta et Nouvelle-Écosse.'}`,
+          organisme: SANTE.nom,
+          lien_officiel: SANTE.lien,
         },
       )
     }
@@ -312,10 +288,10 @@ export function generateTasks(profile) {
 
   tasks.push(
     {
-      titre: `Obtenir ta carte d\'assurance maladie ${sante.nom}`,
+      titre: `Obtenir ta carte d\'assurance maladie ${SANTE.nom}`,
       categorie: 'sante', priorite: 'urgent', jour_cible: 7, phase: 2,
-      description: `${sante.attente !== '0 mois' ? `Après le délai de carence de ${sante.attente}, tu recevras ta carte. ` : ''}Garde tes reçus de consultations privées pendant l'attente pour un éventuel remboursement partiel.`,
-      lien_officiel: sante.lien,
+      description: `${SANTE.attente !== '0 mois' ? `Après le délai de carence de ${SANTE.attente}, tu recevras ta carte. ` : ''}Garde tes reçus de consultations privées pendant l'attente pour un éventuel remboursement partiel.`,
+      lien_officiel: SANTE.lien,
     },
     {
       titre: 'Créer ton compte Mon dossier Service Canada',
@@ -346,20 +322,10 @@ export function generateTasks(profile) {
   tasks.push({
     titre: 'Convertir ton permis de conduire étranger',
     categorie: 'transport', priorite: 'normal', jour_cible: 14, phase: 2,
-    description: `Apporte ton permis étranger + traduction certifiée (si non anglais/français) + preuve de résidence. ${permis.nom} gère la conversion. Certains pays ont des ententes de réciprocité (pas de test requis).`,
-    organisme: permis.nom,
-    lien_officiel: permis.lien,
+    description: `Apporte ton permis étranger + traduction certifiée (si non anglais/français) + preuve de résidence. ${PERMIS.nom} gère la conversion. Certains pays ont des ententes de réciprocité (pas de test requis).`,
+    organisme: PERMIS.nom,
+    lien_officiel: PERMIS.lien,
   })
-
-  if (province === 'QC') {
-    tasks.push({
-      titre: 'S\'inscrire à la francisation (gratuit)',
-      categorie: 'langue', priorite: 'urgent', jour_cible: 14, phase: 2,
-      description: 'Cours de français gratuits financés par le MIFI. Ouvert à tous les immigrants. Disponible en ligne et en présentiel. Allocation de participation possible.',
-      organisme: 'MIFI Québec',
-      lien_officiel: 'https://www.quebec.ca/education/apprendre-le-francais',
-    })
-  }
 
   if (hasKids) {
     tasks.push({
@@ -388,20 +354,18 @@ export function generateTasks(profile) {
     {
       titre: 'Trouver un médecin de famille',
       categorie: 'sante', priorite: 'normal', jour_cible: 30, phase: 3,
-      description: 'Utilise le portail provincial de ta province pour trouver un médecin acceptant de nouveaux patients. Clinique sans rendez-vous en attendant.',
-      lien_officiel: 'https://www.canada.ca/fr/sante-canada/services/soins-sante/professionnels-sante.html',
+      description: 'Utilise Health Care Connect (Ontario) pour trouver un médecin acceptant de nouveaux patients. Clinique sans rendez-vous (Appel-Santé 811) en attendant.',
+      lien_officiel: 'https://healthcareconnect.ontario.ca',
     },
   )
 
-  if (!province === 'QC') {
-    tasks.push({
-      titre: 'S\'inscrire aux cours de langue LINC (anglais) ou CLIC (français)',
-      categorie: 'langue', priorite: 'normal', jour_cible: 14, phase: 3,
-      description: 'Gratuit pour les RP et réfugiés financé par IRCC. Inscription via un fournisseur LINC/CLIC de ta ville.',
-      organisme: 'IRCC',
-      lien_officiel: 'https://www.canada.ca/fr/immigration-refugies-citoyennete/services/etablissement-nouveaux-immigrants/apprentissage-langue.html',
-    })
-  }
+  tasks.push({
+    titre: 'S\'inscrire aux cours de langue LINC (anglais) ou CLIC (français)',
+    categorie: 'langue', priorite: 'normal', jour_cible: 14, phase: 3,
+    description: 'Gratuit pour les RP et réfugiés, financé par IRCC. Inscription via un fournisseur LINC/CLIC de ta ville en Ontario.',
+    organisme: 'IRCC',
+    lien_officiel: 'https://www.canada.ca/fr/immigration-refugies-citoyennete/services/etablissement-nouveaux-immigrants/apprentissage-langue.html',
+  })
 
   if (wantsJob) {
     tasks.push(
@@ -439,16 +403,6 @@ export function generateTasks(profile) {
       categorie: 'education', priorite: 'normal', jour_cible: 30, phase: 3,
       description: 'Programme fédéral d\'garderies à 10 $/jour dans la plupart des provinces. Listes d\'attente importantes — inscris-toi dès l\'arrivée via le portail provincial.',
       lien_officiel: 'https://www.canada.ca/fr/emploi-developpement-social/programmes/apprentissage-garde-jeunes-enfants.html',
-    })
-  }
-
-  if (province === 'QC') {
-    tasks.push({
-      titre: 'Faire reconnaître tes diplômes au Québec',
-      categorie: 'emploi', priorite: 'normal', jour_cible: 30, phase: 3,
-      description: 'Contacte l\'ordre professionnel de ton domaine (ingénieurs, médecins, avocats) ou le MIFI pour la reconnaissance. Certains diplômes nécessitent une formation d\'appoint.',
-      organisme: 'MIFI / Ordre professionnel',
-      lien_officiel: 'https://www.quebec.ca/emploi/travailler-au-quebec/exercer-profession-reglementee',
     })
   }
 
