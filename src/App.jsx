@@ -1,5 +1,8 @@
+import { useEffect } from 'react'
 import { ClerkProvider } from '@clerk/clerk-react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import i18n from './lib/i18n'
+import useAppStore from './store/useAppStore'
 import ProtectedRoute from './components/layout/ProtectedRoute'
 import AppShell from './components/layout/AppShell'
 import Welcome from './pages/Welcome'
@@ -14,6 +17,9 @@ import Profil from './pages/Profil'
 const clerkKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 
 export default function App() {
+  const langue = useAppStore(s => s.langue)
+  useEffect(() => { i18n.changeLanguage(langue) }, [langue])
+
   return (
     <ClerkProvider publishableKey={clerkKey}>
       <BrowserRouter>

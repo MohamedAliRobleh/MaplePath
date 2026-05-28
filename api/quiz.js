@@ -19,7 +19,7 @@ export default async function handler(req, res) {
     const { score, total_questions, pourcentage, duree_secondes, questions_ratees } = req.body
     const rows = await sql`
       INSERT INTO quiz_sessions (user_id, score, total_questions, pourcentage, duree_secondes, questions_ratees)
-      VALUES (${userId}, ${score}, ${total_questions}, ${pourcentage}, ${duree_secondes}, ${JSON.stringify(questions_ratees || [])})
+      VALUES (${userId}, ${score}, ${total_questions}, ${pourcentage}, ${duree_secondes}, ${questions_ratees || []})
       RETURNING *
     `
     if (pourcentage >= 75) {

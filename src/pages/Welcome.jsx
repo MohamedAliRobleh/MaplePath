@@ -12,11 +12,16 @@ const features = [
   { icon: HelpCircle,   title: 'Quiz citoyenneté',         desc: '100 questions officielles pour préparer ton test' },
 ]
 
-const langues = ['🇫🇷 FR', '🇬🇧 EN', '🇸🇦 AR', '🇪🇸 ES']
+const langues = [
+  { code: 'fr', label: '🇫🇷 FR' },
+  { code: 'en', label: '🇬🇧 EN' },
+  { code: 'ar', label: '🇸🇦 AR' },
+  { code: 'es', label: '🇪🇸 ES' },
+]
 
 export default function Welcome() {
   const { isSignedIn } = useAuth()
-  const { profile } = useAppStore()
+  const { profile, langue, setLangue } = useAppStore()
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -28,8 +33,10 @@ export default function Welcome() {
     <div className="min-h-screen bg-white flex flex-col px-4 pt-8 pb-8">
       <div className="flex justify-end gap-2 mb-8">
         {langues.map(l => (
-          <button key={l} className="text-xs font-medium text-gray-400 hover:text-gray-700 px-2 py-1 rounded-lg hover:bg-gray-50">
-            {l}
+          <button key={l.code} onClick={() => setLangue(l.code)}
+            className={`text-xs font-medium px-2 py-1 rounded-lg transition-all
+              ${langue === l.code ? 'text-brand-700 bg-brand-50 font-semibold' : 'text-gray-400 hover:text-gray-700 hover:bg-gray-50'}`}>
+            {l.label}
           </button>
         ))}
       </div>

@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import i18n from '../lib/i18n'
 
 const useAppStore = create(
   persist(
@@ -26,7 +27,7 @@ const useAppStore = create(
       })),
       addTask: (task) => set(state => ({ tasks: [...state.tasks, task] })),
 
-      setLangue: (langue) => set({ langue }),
+      setLangue: (langue) => { i18n.changeLanguage(langue); set({ langue }) },
 
       setAnswer: (key, value) => set(state => ({
         onboardingAnswers: { ...state.onboardingAnswers, [key]: value }
