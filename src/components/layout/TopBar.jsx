@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { ChevronLeft, Bell } from 'lucide-react'
 import useAppStore from '../../store/useAppStore'
+import Logo from '../ui/Logo'
 
 export default function TopBar({ title, showBack = false, showNotifications = true }) {
   const navigate = useNavigate()
@@ -16,11 +17,7 @@ export default function TopBar({ title, showBack = false, showNotifications = tr
           </button>
         )}
         {title && <h1 className="font-display font-bold text-lg text-gray-900">{title}</h1>}
-        {!title && (
-          <span className="font-display font-bold text-xl text-gray-900">
-            Maple<span className="text-brand-300">Path</span>
-          </span>
-        )}
+        {!title && <Logo size={32} showText />}
       </div>
       {showNotifications && (
         <button className="relative p-2 rounded-full hover:bg-gray-100">

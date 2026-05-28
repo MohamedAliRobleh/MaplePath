@@ -4,6 +4,7 @@ import { SignInButton, SignUpButton, useAuth } from '@clerk/clerk-react'
 import { useEffect } from 'react'
 import { MapPin, CheckSquare, HelpCircle } from 'lucide-react'
 import Button from '../components/ui/Button'
+import Logo from '../components/ui/Logo'
 import useAppStore from '../store/useAppStore'
 
 const features = [
@@ -43,9 +44,7 @@ export default function Welcome() {
 
       <div className="flex-1 flex flex-col items-center justify-center text-center">
         <motion.div animate={{ scale: [0.9, 1.05, 1] }} transition={{ duration: 0.6 }} className="mb-6">
-          <div className="w-20 h-20 bg-brand-300 rounded-4xl flex items-center justify-center shadow-brand mx-auto">
-            <span className="text-4xl">🍁</span>
-          </div>
+          <Logo size={80} className="mx-auto" />
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
