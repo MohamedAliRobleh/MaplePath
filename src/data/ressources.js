@@ -1,96 +1,54 @@
 export const transport = [
   {
     nom: 'PRESTO',
-    description: 'Carte de transport unifiée — Ontario (TTC, GO Transit, OC Transpo, etc.)',
-    avantages: ['Toronto, Ottawa, Hamilton...', 'Bus + métro + train', 'Recharge en ligne', 'Tarifs réduits'],
-    badge: '🚇 Ontario',
+    description: 'Carte de transport unifiée — TTC, GO Transit, OC Transpo, MiWay et plus',
+    avantages: ['Toronto, Ottawa, Hamilton, Mississauga...', 'Bus + métro + GO Train', 'Recharge en ligne ou en magasin', 'Tarifs réduits automatiques'],
+    badge: '⭐ Recommandé',
     lien: 'https://www.prestocard.ca',
   },
   {
-    nom: 'Carte OPUS',
-    description: 'Carte de transport de Montréal et région — STM, RTL, STL, exo',
-    avantages: ['Montréal + banlieue', 'Mensuel illimité', 'Bus + métro + train', 'Tarif étudiant'],
-    badge: '🚇 Québec',
-    lien: 'https://www.stm.info/fr/infos/titres-et-tarifs/carte-opus',
-  },
-  {
-    nom: 'Compass Card',
-    description: 'Carte de transport de Vancouver — TransLink (SkyTrain, bus, SeaBus)',
-    avantages: ['Vancouver + banlieue', 'SkyTrain + bus + ferry', 'Recharge app', 'Plafond journalier'],
-    badge: '🚇 Colombie-Brit.',
-    lien: 'https://www.compasscard.ca',
-  },
-  {
-    nom: 'Calgary Transit',
-    description: 'Réseau bus et CTrain de Calgary',
-    avantages: ['Bus + CTrain', 'App My Fare', 'Passe mensuelle', 'Zone unique'],
-    badge: '🚌 Alberta',
-    lien: 'https://www.calgarytransit.com',
-  },
-  {
-    nom: 'ETS Edmonton',
-    description: 'Edmonton Transit Service — bus et LRT',
-    avantages: ['Bus + LRT', 'Passe mensuelle', 'App eTix', 'Tarif étudiant'],
-    badge: '🚌 Alberta',
-    lien: 'https://www.edmonton.ca/ets',
-  },
-  {
     nom: 'Transit App',
-    description: 'L\'app de transport en commun la plus populaire au Canada — temps réel',
-    avantages: ['Toutes les villes', 'Temps réel GPS', 'Alerte départ', 'Hors ligne'],
-    badge: '📱 Toutes villes',
+    description: "L'app de transport en commun #1 en Ontario — horaires temps réel pour TTC, GO, MiWay, OC Transpo",
+    avantages: ['Temps réel GPS', 'Toutes lignes TTC', 'Alerte départ', 'Mode hors ligne'],
+    badge: '📱 App gratuite',
     lien: 'https://transitapp.com',
   },
   {
     nom: 'Uber',
-    description: 'Covoiturage et livraison — disponible dans toutes les grandes villes',
-    avantages: ['Toutes grandes villes', 'Uber Eats', 'Paiement carte', 'Uber XL pour familles'],
+    description: 'Covoiturage disponible partout en Ontario — Toronto, Ottawa, Hamilton et plus',
+    avantages: ['Toutes villes Ontario', 'Uber Eats', 'Paiement carte sans cash', 'Uber XL pour familles'],
     badge: '🚗 Covoiturage',
     lien: 'https://www.uber.com/ca/fr/',
   },
   {
     nom: 'Lyft',
-    description: 'Alternative à Uber — présent en Ontario, BC, Alberta, Québec',
-    avantages: ['Ontario + BC + AB + QC', 'Souvent moins cher', 'Pas de frais annulation', 'Mode partage'],
+    description: 'Alternative à Uber — présent à Toronto et grandes villes d\'Ontario',
+    avantages: ['Toronto + région', 'Souvent moins cher', 'Pas de frais annulation', 'Mode partage économique'],
     badge: '🚗 Covoiturage',
     lien: 'https://www.lyft.com/rider/cities/canada',
   },
   {
-    nom: 'DriveTest (Ontario)',
-    description: 'Convertir ton permis étranger en permis ontarien — G2/G',
-    avantages: ['Permis Ontario', 'Test écrit + conduite', 'Prise de RDV en ligne', 'Conversion étrangère'],
-    badge: '🪪 Permis ON',
+    nom: 'DriveTest Ontario',
+    description: 'Convertir ton permis étranger en permis ontarien — centres partout en Ontario',
+    avantages: ['Permis Ontario (G2/G)', 'Test écrit + conduite', 'Prise de RDV en ligne', 'Conversion internationale'],
+    badge: '🪪 Permis Ontario',
     lien: 'https://drivetest.ca',
   },
   {
-    nom: 'SAAQ (Québec)',
-    description: 'Société de l\'assurance automobile du Québec — permis et immatriculation',
-    avantages: ['Permis Québec', 'Assurance obligatoire', 'Immatriculation', 'Ententes avec 14 pays'],
-    badge: '🪪 Permis QC',
-    lien: 'https://saaq.gouv.qc.ca',
-  },
-  {
-    nom: 'ICBC (Colombie-Brit.)',
-    description: 'Assurance auto obligatoire + permis de conduire en C.-B.',
-    avantages: ['Assurance obligatoire BC', 'Permis C.-B.', 'Conversion étrangère', 'RDV en ligne'],
-    badge: '🪪 Permis BC',
-    lien: 'https://www.icbc.com',
-  },
-  {
     nom: 'CAA Canada',
-    description: 'Association d\'automobilistes — assistance routière 24/7 partout au Canada',
-    avantages: ['Remorquage 24/7', 'Crevaison + batterie', 'Réductions hôtels', 'Carte internationale'],
+    description: 'Assistance routière 24/7 — indispensable pour conducteurs en Ontario',
+    avantages: ['Remorquage 24/7', 'Crevaison + batterie', 'Réductions hôtels et attraits', 'Carte internationale'],
     badge: '🆘 Assistance',
-    lien: 'https://www.caa.ca',
+    lien: 'https://www.caasco.com',
   },
 ]
 
 export const carteSim = [
   {
     nom: 'Public Mobile',
-    description: 'Filiale de Telus — le meilleur rapport qualité/prix au Canada',
+    description: 'Filiale de Telus — le meilleur rapport qualité/prix en Ontario',
     prix: 'Dès 15$/mois',
-    avantages: ['Prépayé, sans contrat', 'Réseau Telus (excellent)', 'Réductions fidélité', '15–50$/mois'],
+    avantages: ['Prépayé, sans contrat', 'Réseau Telus (excellent Ontario)', 'Réductions fidélité', '15–50$/mois'],
     badge: '💰 Économique',
     lien: 'https://www.publicmobile.ca',
   },
@@ -120,25 +78,25 @@ export const carteSim = [
   },
   {
     nom: 'Freedom Mobile',
-    description: 'Plans illimités à prix cassés — surtout ON, BC, AB',
+    description: 'Plans illimités à prix cassés — fort en Ontario',
     prix: 'Dès 30$/mois',
-    avantages: ['Données illimitées', 'Appels USA/Mexique', 'Plans famille', 'Zones ON/BC/AB'],
+    avantages: ['Données illimitées', 'Appels USA/Mexique', 'Plans famille', 'Couverture Ontario'],
     badge: null,
     lien: 'https://www.freedommobile.ca',
   },
   {
     nom: 'Rogers',
-    description: 'Opérateur principal — couverture nationale étendue',
+    description: 'Opérateur principal — meilleure couverture 5G en Ontario',
     prix: 'Dès 40$/mois',
-    avantages: ['Couverture nationale', '5G avancé', 'Roaming USA inclus', 'Service premium'],
+    avantages: ['Couverture Ontario étendue', '5G avancé', 'Roaming USA inclus', 'Service premium'],
     badge: '📶 Meilleure couverture',
     lien: 'https://www.rogers.com',
   },
   {
     nom: 'Bell',
-    description: 'Excellent en zones rurales — réseau le plus étendu',
+    description: 'Excellent réseau partout en Ontario — zones rurales incluses',
     prix: 'Dès 40$/mois',
-    avantages: ['Meilleure couverture rurale', '5G nationwide', 'Plans familles', 'Fibre internet'],
+    avantages: ['Meilleure couverture rurale ON', '5G nationwide', 'Plans familles', 'Fibre internet'],
     badge: '🏕️ Zones rurales',
     lien: 'https://www.bell.ca',
   },
@@ -177,23 +135,16 @@ export const banques = [
   {
     nom: 'BMO',
     programme: 'BMO NewStart',
-    avantages: ['Compte gratuit', 'Prêt hypothécaire accessible', 'Conseiller dédié newcomers', 'CIBC partenaire'],
+    avantages: ['Compte gratuit', 'Prêt hypothécaire accessible', 'Conseiller dédié newcomers', 'Succursales Ontario'],
     badge: null,
     lien: 'https://www.bmo.com/fr-ca/main/personal/newstart/',
   },
   {
     nom: 'CIBC',
     programme: 'CIBC Smart for Newcomers',
-    avantages: ['Compte gratuit 2 ans', 'Carte crédit sans historique', 'Virement international gratuit', 'Succursales aéroports'],
+    avantages: ['Compte gratuit 2 ans', 'Carte crédit sans historique', 'Virement international gratuit', 'Succursales aéroports Toronto'],
     badge: '✈️ Dès l\'aéroport',
     lien: 'https://www.cibc.com/fr/special-offers/newcomers-to-canada.html',
-  },
-  {
-    nom: 'Desjardins',
-    programme: 'Offre Nouveaux Arrivants',
-    avantages: ['Coopérative (pas une banque)', 'Forte présence au Québec', 'Assurances intégrées', 'Ristournes annuelles'],
-    badge: '🇶🇨 Idéal Québec',
-    lien: 'https://www.desjardins.com/fr/particuliers/produits-services/comptes/comptes-cheques/nouveaux-arrivants.html',
   },
   {
     nom: 'Tangerine',
@@ -214,11 +165,11 @@ export const banques = [
 export const logement = [
   {
     nom: 'Kijiji Immobilier',
-    description: 'Le plus populaire au Canada — millions d\'annonces de location',
+    description: 'Le plus populaire en Ontario — millions d\'annonces de location',
     type: 'Plateforme généraliste',
-    avantages: ['Plus grande base d\'annonces', 'Location et achat', 'Alertes email', 'Gratuit pour chercher'],
+    avantages: ['Plus grande base d\'annonces Ontario', 'Location et achat', 'Alertes email', 'Gratuit pour chercher'],
     badge: '🏆 Le plus populaire',
-    lien: 'https://www.kijiji.ca/b-location-appartement/ville-de-montreal/c37l1700281',
+    lien: 'https://www.kijiji.ca/b-appartement-et-condo/ville-de-toronto/c37l1700273',
   },
   {
     nom: 'Rentals.ca',
@@ -230,7 +181,7 @@ export const logement = [
   },
   {
     nom: 'PadMapper',
-    description: 'Vue carte intuitive — trouve rapidement par quartier',
+    description: 'Vue carte intuitive — trouve rapidement par quartier en Ontario',
     type: 'Carte interactive',
     avantages: ['Carte interactive', 'Toutes sources agrégées', 'Filtres précis', 'App mobile'],
     badge: null,
@@ -254,7 +205,7 @@ export const logement = [
   },
   {
     nom: 'Facebook Marketplace',
-    description: 'Louer directement au propriétaire — communauté locale',
+    description: 'Louer directement au propriétaire — communauté locale Ontario',
     type: 'Communauté locale',
     avantages: ['Contact direct propriétaire', 'Groupes de location locaux', 'Gratuit', 'Sous-locations aussi'],
     badge: null,
@@ -264,17 +215,9 @@ export const logement = [
     nom: 'Point2Homes',
     description: 'Recherche immobilière par carte avec statistiques de quartier',
     type: 'Carte + statistiques',
-    avantages: ['Stats de quartier', 'Crime map', 'Scores d\'école', 'Données démographiques'],
+    avantages: ['Stats de quartier', 'Scores d\'école', 'Données démographiques', 'Comparatif de quartiers'],
     badge: '📊 Statistiques',
     lien: 'https://www.point2homes.com/CA',
-  },
-  {
-    nom: 'Craigslist',
-    description: 'Annonces directes de particuliers — vérifier les offres',
-    type: 'Petites annonces',
-    avantages: ['Annonces de particuliers', 'Pas de frais', 'Très local', 'Sous-locations'],
-    badge: '⚠️ Vérifier les offres',
-    lien: 'https://www.craigslist.org/about/sites#CA',
   },
 ]
 
@@ -295,10 +238,17 @@ export const emploi = [
   },
   {
     nom: 'LinkedIn',
-    description: 'Réseau professionnel + emploi — indispensable pour networker',
+    description: 'Réseau professionnel + emploi — indispensable pour networker en Ontario',
     avantages: ['Réseau professionnel', 'Connexions directes recruteurs', 'Profil visible', 'Cours en ligne'],
     badge: '🤝 Networking',
     lien: 'https://www.linkedin.com/jobs',
+  },
+  {
+    nom: 'ACCES Employment',
+    description: 'Organisme dédié aux immigrants en Ontario — programmes gratuits d\'intégration professionnelle',
+    avantages: ['Pour immigrants', 'Gratuit', 'Mentorat professionnel', 'Ateliers CV/entretien'],
+    badge: '🆓 Gratuit immigrants',
+    lien: 'https://accesemployment.ca',
   },
   {
     nom: 'Workopolis',
@@ -306,20 +256,6 @@ export const emploi = [
     avantages: ['Focalisé Canada', 'Partenaires RH locaux', 'Conseils carrière', 'Secteurs spécialisés'],
     badge: '🍁 100% Canadien',
     lien: 'https://www.workopolis.com',
-  },
-  {
-    nom: 'ACCES Employment',
-    description: 'Organisme dédié aux immigrants — programmes gratuits d\'intégration professionnelle',
-    avantages: ['Pour immigrants', 'Gratuit', 'Mentorat professionnel', 'Ateliers CV/entretien'],
-    badge: '🆓 Gratuit immigrants',
-    lien: 'https://accesemployment.ca',
-  },
-  {
-    nom: 'Monster Canada',
-    description: 'Site emploi international avec présence canadienne',
-    avantages: ['International + Canada', 'CV builder intégré', 'Alertes personnalisées', 'Bien établi'],
-    badge: null,
-    lien: 'https://www.monster.ca',
   },
   {
     nom: 'Glassdoor',
@@ -331,14 +267,9 @@ export const emploi = [
 ]
 
 export const medecin = [
-  { prov: 'Ontario',          label: 'Health811',               url: 'https://health811.ontario.ca',                                                       desc: 'Médecins et infirmières praticiennes acceptant patients' },
-  { prov: 'Québec',           label: 'GAMF',                    url: 'https://www.quebec.ca/sante/trouver-une-ressource/guichet-acces-medecin-famille',     desc: 'Guichet d\'accès à un médecin de famille' },
-  { prov: 'Colombie-Brit.',   label: 'HealthLink BC',           url: 'https://www.healthlinkbc.ca',                                                        desc: 'Trouver un médecin + infoline 8-1-1' },
-  { prov: 'Alberta',          label: 'Alberta Health Services', url: 'https://www.albertahealthservices.ca/findhealth/service.aspx',                        desc: 'Portail santé Alberta' },
-  { prov: 'Manitoba',         label: 'Soins Communs MB',        url: 'https://soinscommuns.ca',                                                            desc: 'Trouver un prestataire de soins' },
-  { prov: 'Saskatchewan',     label: 'SK Health Authority',     url: 'https://www.saskhealthauthority.ca',                                                 desc: 'Services de santé Saskatchewan' },
-  { prov: 'Nouvelle-Écosse',  label: 'NS Health Connect',       url: 'https://needafamilypractice.nshealth.ca',                                            desc: 'Inscrire pour un médecin de famille' },
-  { prov: 'Tout le Canada',   label: 'Maple (Télémédecine)',    url: 'https://www.getmaple.ca',                                                            desc: 'Médecin en ligne 24/7 — consultation immédiate' },
+  { prov: 'Ontario',        label: 'Health Care Connect',  url: 'https://healthcareconnect.ontario.ca',  desc: 'Trouver un médecin ou infirmière praticienne acceptant de nouveaux patients' },
+  { prov: 'Urgences santé', label: 'Health 811',           url: 'https://health811.ontario.ca',          desc: 'Infoline santé 24/7 — conseils infirmiers + orientation sans attente' },
+  { prov: 'Tout le Canada', label: 'Maple (Télémédecine)', url: 'https://www.getmaple.ca',               desc: 'Médecin en ligne 24/7 — consultation en moins de 2 minutes' },
 ]
 
 export const assurances = [
@@ -357,13 +288,6 @@ export const assurances = [
     lien: 'https://www.tdassurance.com',
   },
   {
-    nom: 'Desjardins Assurances',
-    description: 'Coopérative — ristournes annuelles aux membres',
-    avantages: ['Ristournes annuelles', 'Assurance conducteur app', 'Forfaits familles', 'Fort au Québec'],
-    badge: '🇶🇨 Fort au Québec',
-    lien: 'https://www.desjardinsassurances.com',
-  },
-  {
     nom: 'Manulife',
     description: 'Leader assurance vie et santé au Canada',
     avantages: ['Assurance vie', 'Assurance maladie', 'Voyage', 'Régimes collectifs'],
@@ -371,7 +295,7 @@ export const assurances = [
     lien: 'https://www.manulife.ca',
   },
   {
-    nom: 'Sonnet (Économique)',
+    nom: 'Sonnet',
     description: 'Assurance 100% en ligne — devis en 5 minutes',
     avantages: ['Devis en 5 min', '100% en ligne', 'Prix compétitifs', 'Sans intermédiaire'],
     badge: '💻 En ligne',
@@ -397,13 +321,12 @@ export const formulairesIRCC = [
 ]
 
 export const coursLangue = [
-  { nom: 'LINC', gratuit: true,  description: "Cours d'anglais gratuits financés par le fédéral pour les RP et réfugiés",    lien: 'https://www.canada.ca/fr/immigration-refugies-citoyennete/services/etablissement-nouveaux-immigrants/apprentissage-langue.html' },
-  { nom: 'CLIC', gratuit: true,  description: 'Cours de français gratuits pour immigrants adultes — partout au Canada',       lien: 'https://www.canada.ca/fr/immigration-refugies-citoyennete/services/etablissement-nouveaux-immigrants/apprentissage-langue.html' },
-  { nom: 'DELF', gratuit: false, description: 'Certification officielle du français — reconnue pour la citoyenneté',          lien: 'https://www.institutfrancais.com/delf-dalf' },
-  { nom: 'TEFAQ', gratuit: false, description: "Test d'évaluation du français adapté au Québec",                              lien: 'https://www.lefrancaisdesaffaires.fr/tests-et-diplomes/tefaq/' },
-  { nom: 'IELTS', gratuit: false, description: "Test d'anglais international — requis pour citoyenneté et certains emplois", lien: 'https://www.ielts.org' },
-  { nom: 'Duolingo English Test', gratuit: false, description: "Alternative moins chère à l'IELTS — acceptée par IRCC",      lien: 'https://englishtest.duolingo.com' },
-  { nom: 'Alliance Française',   gratuit: false, description: 'Cours de français reconnus, présents dans toutes les grandes villes canadiennes', lien: 'https://www.alliancefrancaise.ca' },
+  { nom: 'LINC', gratuit: true,  description: "Cours d'anglais gratuits financés par IRCC pour les RP et réfugiés en Ontario",   lien: 'https://www.canada.ca/fr/immigration-refugies-citoyennete/services/etablissement-nouveaux-immigrants/apprentissage-langue.html' },
+  { nom: 'CLIC', gratuit: true,  description: 'Cours de français gratuits pour immigrants adultes — disponible en Ontario',        lien: 'https://www.canada.ca/fr/immigration-refugies-citoyennete/services/etablissement-nouveaux-immigrants/apprentissage-langue.html' },
+  { nom: 'IELTS', gratuit: false, description: "Test d'anglais international — requis pour citoyenneté et certains emplois professionnels", lien: 'https://www.ielts.org' },
+  { nom: 'Duolingo English Test', gratuit: false, description: "Alternative moins chère à l'IELTS — acceptée par IRCC",           lien: 'https://englishtest.duolingo.com' },
+  { nom: 'DELF', gratuit: false, description: 'Certification officielle du français — reconnue pour la citoyenneté canadienne',    lien: 'https://www.institutfrancais.com/delf-dalf' },
+  { nom: 'Alliance Française Toronto', gratuit: false, description: 'Cours de français reconnus — présent à Toronto, Ottawa, Hamilton', lien: 'https://www.alliance-francaise.ca' },
 ]
 
 export const aideGouvernementale = [
@@ -413,5 +336,5 @@ export const aideGouvernementale = [
   { nom: 'Régime de pensions du Canada (RPC)',        description: 'Pension de retraite automatique — cotisation prélevée sur le salaire, pension à 65 ans',                  lien: 'https://www.canada.ca/fr/emploi-developpement-social/programmes/pensions.html' },
   { nom: 'Assurance-emploi (AE)',                     description: 'Prestations temporaires si perte d\'emploi involontaire — jusqu\'à 55% du salaire pendant 45 semaines',  lien: 'https://www.canada.ca/fr/emploi-developpement-social/programmes/assurance-emploi.html' },
   { nom: 'Supplément de revenu garanti (SRG)',        description: 'Prestation mensuelle supplémentaire pour aînés à faible revenu — cumulable avec la pension',              lien: 'https://www.canada.ca/fr/emploi-developpement-social/programmes/securite-vieillesse/srg.html' },
-  { nom: 'Remboursement dentaire canadien',           description: 'Couverture dentaire pour enfants < 12 ans sans assurance privée — jusqu\'à 650$/an par enfant',          lien: 'https://www.canada.ca/fr/agence-revenu/services/prestations-enfants-familles/regime-canadien-soins-dentaires.html' },
+  { nom: 'Régime canadien de soins dentaires',        description: 'Couverture dentaire pour enfants < 12 ans sans assurance privée — jusqu\'à 650$/an par enfant',          lien: 'https://www.canada.ca/fr/agence-revenu/services/prestations-enfants-familles/regime-canadien-soins-dentaires.html' },
 ]
