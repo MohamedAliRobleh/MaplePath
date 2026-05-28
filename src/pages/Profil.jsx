@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth, useUser } from '@clerk/clerk-react'
 import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 import { LogOut, ChevronRight, Globe, FileText } from 'lucide-react'
 import Button from '../components/ui/Button'
 import Card from '../components/ui/Card'
@@ -10,6 +11,7 @@ import useAppStore from '../store/useAppStore'
 import { getProvince } from '../data/provinces'
 
 export default function Profil() {
+  const { t } = useTranslation()
   const { signOut, getToken } = useAuth()
   const { user } = useUser()
   const { profile, langue, setLangue, clearProfile } = useAppStore()
@@ -57,7 +59,7 @@ export default function Profil() {
       <Card className="mb-3">
         <div className="flex items-center gap-3 mb-3">
           <Globe size={18} className="text-gray-500" />
-          <p className="font-display font-semibold text-sm text-gray-900">Langue de l'application</p>
+          <p className="font-display font-semibold text-sm text-gray-900">{t('profil.langue')}</p>
         </div>
         <div className="grid grid-cols-4 gap-2">
           {[{code:'fr',label:'FR 🇫🇷'},{code:'en',label:'EN 🇬🇧'},{code:'ar',label:'AR 🇸🇦'},{code:'es',label:'ES 🇪🇸'}].map(l => (
@@ -76,19 +78,19 @@ export default function Profil() {
         <div className="flex flex-col gap-3">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs text-gray-500">Province</p>
+              <p className="text-xs text-gray-500">{t('profil.province')}</p>
               <p className="font-display font-medium text-sm text-gray-900">{province?.nom || '—'}</p>
             </div>
             <Badge variant="gray">{profile?.province || '—'}</Badge>
           </div>
           <div className="h-px bg-gray-100" />
           <div>
-            <p className="text-xs text-gray-500">Date d'arrivée</p>
-            <p className="font-display font-medium text-sm text-gray-900">{profile?.date_arrivee || 'Non renseignée'}</p>
+            <p className="text-xs text-gray-500">{t('profil.arrival')}</p>
+            <p className="font-display font-medium text-sm text-gray-900">{profile?.date_arrivee || t('profil.notSet')}</p>
           </div>
           <div className="h-px bg-gray-100" />
           <div>
-            <p className="text-xs text-gray-500">Priorités</p>
+            <p className="text-xs text-gray-500">{t('profil.priorities')}</p>
             <div className="flex flex-wrap gap-1 mt-1">
               {(profile?.priorites || []).map(p => <Badge key={p} variant="brand">{p}</Badge>)}
             </div>
@@ -100,19 +102,19 @@ export default function Profil() {
       <Card className="mb-3">
         <button onClick={() => navigate('/onboarding')} className="w-full flex items-center gap-3 py-2">
           <FileText size={18} className="text-gray-500" />
-          <span className="flex-1 font-display font-medium text-sm text-gray-900 text-left">Modifier mes priorités</span>
+          <span className="flex-1 font-display font-medium text-sm text-gray-900 text-left">{t('profil.editPriorities')}</span>
           <ChevronRight size={16} className="text-gray-400" />
         </button>
       </Card>
 
       <div className="mt-6">
         <Button variant="danger" fullWidth onClick={handleSignOut}>
-          <LogOut size={16} className="mr-2 inline" /> Se déconnecter
+          <LogOut size={16} className="mr-2 inline" /> {t('profil.signout')}
         </Button>
       </div>
 
       <p className="text-center text-xs text-gray-400 mt-6">
-        MaplePath v0.1.0 · Construit avec ❤️ pour les nouveaux Canadiens
+        MaplePath v0.1.0 · {t('profil.version')}
       </p>
     </div>
   )

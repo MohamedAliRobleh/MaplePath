@@ -28,8 +28,18 @@ const resources = {
         forms: 'Mes formulaires',
         benefits: 'Mes bénéfices',
       },
+      profil: {
+        langue: "Langue de l'application", province: 'Province', arrival: "Date d'arrivée",
+        priorities: 'Priorités', editPriorities: 'Modifier mes priorités', signout: 'Se déconnecter',
+        notSet: 'Non renseignée', version: 'Construit avec ❤️ pour les nouveaux Canadiens',
+      },
+      checklist: {
+        title: 'Ma Checklist', tasks: '{{done}}/{{total}} tâches', completed: '{{pct}}% complété',
+        all: 'Tout', empty: 'Aucune tâche ici', emptyDesc: 'Cette phase est vide ou tout est complété !',
+      },
+      outils: { title: 'Ressources', subtitle: "Toutes les options pour bien s'établir" },
       quiz: { start: 'Commencer', practice: 'Mode pratique', exam: 'Mode examen', result: 'Résultat', score: 'Score : {{score}}/{{total}}', pass: 'Réussi !', fail: 'Continuez à étudier' },
-      common: { complete: 'Terminé', skip: 'Ignorer', save: 'Sauvegarder', cancel: 'Annuler', loading: 'Chargement...', error: 'Une erreur est survenue', retry: 'Réessayer' },
+      common: { complete: 'Terminé', skip: 'Ignorer', save: 'Sauvegarder', cancel: 'Annuler', loading: 'Chargement...', error: 'Une erreur est survenue', retry: 'Réessayer', urgent: 'Urgent' },
     }
   },
   en: {
@@ -58,8 +68,18 @@ const resources = {
         forms: 'My Forms',
         benefits: 'My Benefits',
       },
+      profil: {
+        langue: 'App Language', province: 'Province', arrival: 'Arrival Date',
+        priorities: 'Priorities', editPriorities: 'Edit my priorities', signout: 'Sign out',
+        notSet: 'Not set', version: 'Built with ❤️ for new Canadians',
+      },
+      checklist: {
+        title: 'My Checklist', tasks: '{{done}}/{{total}} tasks', completed: '{{pct}}% complete',
+        all: 'All', empty: 'No tasks here', emptyDesc: 'This phase is empty or all done!',
+      },
+      outils: { title: 'Resources', subtitle: 'All options to settle in well' },
       quiz: { start: 'Start', practice: 'Practice Mode', exam: 'Exam Mode', result: 'Result', score: 'Score: {{score}}/{{total}}', pass: 'Passed!', fail: 'Keep studying' },
-      common: { complete: 'Done', skip: 'Skip', save: 'Save', cancel: 'Cancel', loading: 'Loading...', error: 'An error occurred', retry: 'Retry' },
+      common: { complete: 'Done', skip: 'Skip', save: 'Save', cancel: 'Cancel', loading: 'Loading...', error: 'An error occurred', retry: 'Retry', urgent: 'Urgent' },
     }
   },
   ar: {
@@ -88,8 +108,18 @@ const resources = {
         forms: 'نماذجي',
         benefits: 'مزاياي',
       },
+      profil: {
+        langue: 'لغة التطبيق', province: 'المقاطعة', arrival: 'تاريخ الوصول',
+        priorities: 'الأولويات', editPriorities: 'تعديل أولوياتي', signout: 'تسجيل الخروج',
+        notSet: 'غير محدد', version: 'مبني بـ ❤️ للكنديين الجدد',
+      },
+      checklist: {
+        title: 'قائمتي', tasks: '{{done}}/{{total}} مهام', completed: 'اكتمل {{pct}}%',
+        all: 'الكل', empty: 'لا توجد مهام هنا', emptyDesc: 'هذه المرحلة فارغة أو مكتملة!',
+      },
+      outils: { title: 'الموارد', subtitle: 'جميع الخيارات للاستقرار بشكل جيد' },
       quiz: { start: 'ابدأ', practice: 'وضع التدريب', exam: 'وضع الامتحان', result: 'النتيجة', score: 'النتيجة: {{score}}/{{total}}', pass: 'نجحت!', fail: 'واصل الدراسة' },
-      common: { complete: 'تم', skip: 'تخطي', save: 'حفظ', cancel: 'إلغاء', loading: 'جار التحميل...', error: 'حدث خطأ', retry: 'حاول مجدداً' },
+      common: { complete: 'تم', skip: 'تخطي', save: 'حفظ', cancel: 'إلغاء', loading: 'جار التحميل...', error: 'حدث خطأ', retry: 'حاول مجدداً', urgent: 'عاجل' },
     }
   },
   es: {
@@ -118,8 +148,18 @@ const resources = {
         forms: 'Mis formularios',
         benefits: 'Mis beneficios',
       },
+      profil: {
+        langue: 'Idioma de la app', province: 'Provincia', arrival: 'Fecha de llegada',
+        priorities: 'Prioridades', editPriorities: 'Editar mis prioridades', signout: 'Cerrar sesión',
+        notSet: 'No configurado', version: 'Construido con ❤️ para los nuevos canadienses',
+      },
+      checklist: {
+        title: 'Mi Lista', tasks: '{{done}}/{{total}} tareas', completed: '{{pct}}% completado',
+        all: 'Todo', empty: 'Sin tareas aquí', emptyDesc: '¡Esta fase está vacía o todo completado!',
+      },
+      outils: { title: 'Recursos', subtitle: 'Todas las opciones para instalarse bien' },
       quiz: { start: 'Empezar', practice: 'Modo práctica', exam: 'Modo examen', result: 'Resultado', score: 'Puntuación: {{score}}/{{total}}', pass: '¡Aprobado!', fail: 'Sigue estudiando' },
-      common: { complete: 'Hecho', skip: 'Omitir', save: 'Guardar', cancel: 'Cancelar', loading: 'Cargando...', error: 'Ocurrió un error', retry: 'Reintentar' },
+      common: { complete: 'Hecho', skip: 'Omitir', save: 'Guardar', cancel: 'Cancelar', loading: 'Cargando...', error: 'Ocurrió un error', retry: 'Reintentar', urgent: 'Urgente' },
     }
   },
 }

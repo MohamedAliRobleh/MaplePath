@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ExternalLink, ChevronDown, ChevronUp } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import Badge from '../components/ui/Badge'
 import {
   transport, carteSim, banques, logement, emploi,
@@ -78,10 +79,11 @@ function ResourceCard({ nom, description, prix, avantages, badge, lien, programm
 }
 
 export default function Outils() {
+  const { t } = useTranslation()
   return (
     <div className="px-4 py-4 pb-6">
-      <h2 className="font-display font-bold text-2xl text-gray-900 mb-1">Ressources</h2>
-      <p className="text-sm text-gray-500 mb-5">Toutes les options pour bien s'établir</p>
+      <h2 className="font-display font-bold text-2xl text-gray-900 mb-1">{t('outils.title')}</h2>
+      <p className="text-sm text-gray-500 mb-5">{t('outils.subtitle')}</p>
 
       <Section title="Transport" icon="🚌" count={transport.length}>
         {transport.map(item => <ResourceCard key={item.nom} {...item} />)}

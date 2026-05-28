@@ -2,12 +2,14 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ExternalLink, Plus } from 'lucide-react'
 import { useAuth } from '@clerk/clerk-react'
+import { useTranslation } from 'react-i18next'
 import useAppStore from '../store/useAppStore'
 import Badge from '../components/ui/Badge'
 import ProgressBar from '../components/ui/ProgressBar'
 import { phases, taskCategories } from '../data/tasks'
 
 export default function Checklist() {
+  const { t } = useTranslation()
   const { tasks, toggleTask } = useAppStore()
   const { getToken } = useAuth()
   const [activePhase, setActivePhase] = useState(1)
@@ -38,7 +40,7 @@ export default function Checklist() {
   return (
     <div className="px-4 py-4">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="font-display font-bold text-2xl text-gray-900">Ma Checklist</h2>
+        <h2 className="font-display font-bold text-2xl text-gray-900">{t('checklist.title')}</h2>
         <Badge variant={pct === 100 ? 'success' : 'brand'}>{pct}%</Badge>
       </div>
 
@@ -60,8 +62,8 @@ export default function Checklist() {
       {/* Progress for active phase */}
       <div className="bg-white rounded-3xl border border-black/5 p-4 mb-4 shadow-card">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-xs font-medium text-gray-500">{done}/{phaseTasks.length} tâches</span>
-          <span className="text-xs font-medium text-brand-600">{pct}% complété</span>
+          <span className="text-xs font-medium text-gray-500">{t('checklist.tasks', { done, total: phaseTasks.length })}</span>
+          <span className="text-xs font-medium text-brand-600">{t('checklist.completed', { pct })}</span>
         </div>
         <ProgressBar value={done} max={phaseTasks.length || 1} />
       </div>
@@ -74,7 +76,7 @@ export default function Checklist() {
             className={`flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-medium transition-all
               ${activeCategory === 'all' ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-600'}`}
           >
-            Tout
+            {t('checklist.all')}
           </button>
           {usedCategories.map(cat => (
             <button
@@ -95,8 +97,8 @@ export default function Checklist() {
           {filtered.length === 0 && (
             <div className="text-center py-12">
               <p className="text-4xl mb-2">✅</p>
-              <p className="font-display font-semibold text-gray-900">Aucune tâche ici</p>
-              <p className="text-sm text-gray-500 mt-1">Cette phase est vide ou tout est complété !</p>
+              <p className="font-display font-semibold text-gray-900">{t('checklist.empty')}</p>
+              <p className="text-sm text-gray-500 mt-1">{t('checklist.emptyDesc')}</p>
             </div>
           )}
           {filtered.map((task, i) => (
@@ -120,7 +122,7 @@ export default function Checklist() {
                 </p>
                 {task.description && <p className="text-xs text-gray-500 mt-1 line-clamp-2">{task.description}</p>}
                 <div className="flex flex-wrap gap-1.5 mt-2">
-                  {task.priorite === 'urgent' && <Badge variant="urgent">Urgent</Badge>}
+                  {task.priorite === 'urgent' && <Badge variant="urgent">{t('common.urgent')}</Badge>}
                   {task.formulaire && <Badge variant="info">{task.formulaire}</Badge>}
                   {task.organisme && <Badge variant="gray">{task.organisme}</Badge>}
                 </div>
