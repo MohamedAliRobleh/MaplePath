@@ -53,7 +53,6 @@ export default async function handler(req, res) {
         province = COALESCE(${data.province}, province),
         priorites = COALESCE(${data.priorites}, priorites),
         date_arrivee = COALESCE(${data.date_arrivee}, date_arrivee),
-        date_rp = COALESCE(${data.date_rp}, date_rp),
         score_quiz = COALESCE(${data.score_quiz}, score_quiz),
         updated_at = NOW()
       WHERE id = ${userId}

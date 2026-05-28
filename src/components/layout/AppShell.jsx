@@ -21,10 +21,10 @@ export default function AppShell({ children }) {
           fetch('/api/profile', { headers: { Authorization: `Bearer ${token}` } }).then(r => r.json()),
           fetch('/api/tasks', { headers: { Authorization: `Bearer ${token}` } }).then(r => r.json()),
         ])
-        if (prof.error) { navigate('/onboarding'); return }
+        if (!prof || prof.error) { navigate('/onboarding'); return }
         if (!prof.onboarding_done) { navigate('/onboarding'); return }
         setProfile(prof)
-        setTasks(tasks)
+        if (Array.isArray(tasks)) setTasks(tasks)
       } catch {
         navigate('/onboarding')
       }

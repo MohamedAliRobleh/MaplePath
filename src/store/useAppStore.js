@@ -16,7 +16,7 @@ const useAppStore = create(
       })),
       clearProfile: () => set({ profile: null, tasks: [], onboardingAnswers: {} }),
 
-      setTasks: (tasks) => set({ tasks }),
+      setTasks: (tasks) => set({ tasks: Array.isArray(tasks) ? tasks : [] }),
       toggleTask: (taskId) => set(state => ({
         tasks: state.tasks.map(t =>
           t.id === taskId
@@ -38,10 +38,10 @@ const useAppStore = create(
         notifications: state.notifications.map(n => n.id === id ? { ...n, lu: true } : n)
       })),
 
-      getTasksByPhase: (phase) => get().tasks.filter(t => t.phase === phase),
-      getUrgentTasks: () => get().tasks.filter(t => t.priorite === 'urgent' && !t.complete),
+      getTasksByPhase: (phase) => (Array.isArray(get().tasks) ? get().tasks : []).filter(t => t.phase === phase),
+      getUrgentTasks: () => (Array.isArray(get().tasks) ? get().tasks : []).filter(t => t.priorite === 'urgent' && !t.complete),
       getCompletionRate: () => {
-        const tasks = get().tasks
+        const tasks = Array.isArray(get().tasks) ? get().tasks : []
         if (!tasks.length) return 0
         return Math.round((tasks.filter(t => t.complete).length / tasks.length) * 100)
       },
