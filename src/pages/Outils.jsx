@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { ExternalLink, ChevronDown, ChevronUp } from 'lucide-react'
 import Badge from '../components/ui/Badge'
 import {
-  carteSim, banques, logement, emploi,
+  transport, carteSim, banques, logement, emploi,
   medecin, assurances, formulairesIRCC, coursLangue, aideGouvernementale,
 } from '../data/ressources'
 
@@ -82,6 +82,10 @@ export default function Outils() {
     <div className="px-4 py-4 pb-6">
       <h2 className="font-display font-bold text-2xl text-gray-900 mb-1">Ressources</h2>
       <p className="text-sm text-gray-500 mb-5">Toutes les options pour bien s'établir</p>
+
+      <Section title="Transport" icon="🚌" count={transport.length}>
+        {transport.map(item => <ResourceCard key={item.nom} {...item} />)}
+      </Section>
 
       <Section title="Carte SIM" icon="📱" count={carteSim.length}>
         {carteSim.map(item => <ResourceCard key={item.nom} {...item} />)}

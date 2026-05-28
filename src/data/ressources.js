@@ -1,3 +1,90 @@
+export const transport = [
+  {
+    nom: 'PRESTO',
+    description: 'Carte de transport unifiée — Ontario (TTC, GO Transit, OC Transpo, etc.)',
+    avantages: ['Toronto, Ottawa, Hamilton...', 'Bus + métro + train', 'Recharge en ligne', 'Tarifs réduits'],
+    badge: '🚇 Ontario',
+    lien: 'https://www.prestocard.ca',
+  },
+  {
+    nom: 'Carte OPUS',
+    description: 'Carte de transport de Montréal et région — STM, RTL, STL, exo',
+    avantages: ['Montréal + banlieue', 'Mensuel illimité', 'Bus + métro + train', 'Tarif étudiant'],
+    badge: '🚇 Québec',
+    lien: 'https://www.stm.info/fr/infos/titres-et-tarifs/carte-opus',
+  },
+  {
+    nom: 'Compass Card',
+    description: 'Carte de transport de Vancouver — TransLink (SkyTrain, bus, SeaBus)',
+    avantages: ['Vancouver + banlieue', 'SkyTrain + bus + ferry', 'Recharge app', 'Plafond journalier'],
+    badge: '🚇 Colombie-Brit.',
+    lien: 'https://www.compasscard.ca',
+  },
+  {
+    nom: 'Calgary Transit',
+    description: 'Réseau bus et CTrain de Calgary',
+    avantages: ['Bus + CTrain', 'App My Fare', 'Passe mensuelle', 'Zone unique'],
+    badge: '🚌 Alberta',
+    lien: 'https://www.calgarytransit.com',
+  },
+  {
+    nom: 'ETS Edmonton',
+    description: 'Edmonton Transit Service — bus et LRT',
+    avantages: ['Bus + LRT', 'Passe mensuelle', 'App eTix', 'Tarif étudiant'],
+    badge: '🚌 Alberta',
+    lien: 'https://www.edmonton.ca/ets',
+  },
+  {
+    nom: 'Transit App',
+    description: 'L\'app de transport en commun la plus populaire au Canada — temps réel',
+    avantages: ['Toutes les villes', 'Temps réel GPS', 'Alerte départ', 'Hors ligne'],
+    badge: '📱 Toutes villes',
+    lien: 'https://transitapp.com',
+  },
+  {
+    nom: 'Uber',
+    description: 'Covoiturage et livraison — disponible dans toutes les grandes villes',
+    avantages: ['Toutes grandes villes', 'Uber Eats', 'Paiement carte', 'Uber XL pour familles'],
+    badge: '🚗 Covoiturage',
+    lien: 'https://www.uber.com/ca/fr/',
+  },
+  {
+    nom: 'Lyft',
+    description: 'Alternative à Uber — présent en Ontario, BC, Alberta, Québec',
+    avantages: ['Ontario + BC + AB + QC', 'Souvent moins cher', 'Pas de frais annulation', 'Mode partage'],
+    badge: '🚗 Covoiturage',
+    lien: 'https://www.lyft.com/rider/cities/canada',
+  },
+  {
+    nom: 'DriveTest (Ontario)',
+    description: 'Convertir ton permis étranger en permis ontarien — G2/G',
+    avantages: ['Permis Ontario', 'Test écrit + conduite', 'Prise de RDV en ligne', 'Conversion étrangère'],
+    badge: '🪪 Permis ON',
+    lien: 'https://drivetest.ca',
+  },
+  {
+    nom: 'SAAQ (Québec)',
+    description: 'Société de l\'assurance automobile du Québec — permis et immatriculation',
+    avantages: ['Permis Québec', 'Assurance obligatoire', 'Immatriculation', 'Ententes avec 14 pays'],
+    badge: '🪪 Permis QC',
+    lien: 'https://saaq.gouv.qc.ca',
+  },
+  {
+    nom: 'ICBC (Colombie-Brit.)',
+    description: 'Assurance auto obligatoire + permis de conduire en C.-B.',
+    avantages: ['Assurance obligatoire BC', 'Permis C.-B.', 'Conversion étrangère', 'RDV en ligne'],
+    badge: '🪪 Permis BC',
+    lien: 'https://www.icbc.com',
+  },
+  {
+    nom: 'CAA Canada',
+    description: 'Association d\'automobilistes — assistance routière 24/7 partout au Canada',
+    avantages: ['Remorquage 24/7', 'Crevaison + batterie', 'Réductions hôtels', 'Carte internationale'],
+    badge: '🆘 Assistance',
+    lien: 'https://www.caa.ca',
+  },
+]
+
 export const carteSim = [
   {
     nom: 'Public Mobile',
