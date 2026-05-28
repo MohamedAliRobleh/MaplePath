@@ -275,10 +275,13 @@ export function generateTasks(profile) {
     })
   }
 
+  if (notArrived) return tasks
+
   // ─────────────────────────────────────────────────────────
   // PHASE 2 — DOCUMENTS (J+7 à J+30)
+  // Requiert d'être physiquement au Canada avec un NAS
   // ─────────────────────────────────────────────────────────
-  if (isRP || isAsylum) {
+  if (!notArrived && (isRP || isAsylum)) {
     tasks.push({
       titre: 'Demander ta carte de Résident Permanent',
       categorie: 'documents', priorite: 'urgent', jour_cible: 3, phase: 2,
