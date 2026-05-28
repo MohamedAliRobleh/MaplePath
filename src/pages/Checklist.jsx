@@ -10,9 +10,9 @@ import { phases, taskCategories } from '../data/tasks'
 
 export default function Checklist() {
   const { t } = useTranslation()
-  const { tasks, toggleTask } = useAppStore()
+  const { tasks, toggleTask, profile } = useAppStore()
   const { getToken } = useAuth()
-  const [activePhase, setActivePhase] = useState(1)
+  const [activePhase, setActivePhase] = useState(profile?.phase_actuelle ?? 1)
   const [activeCategory, setActiveCategory] = useState('all')
 
   const phaseTasks = tasks.filter(t => t.phase === activePhase)

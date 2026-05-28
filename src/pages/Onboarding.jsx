@@ -4,7 +4,7 @@ import { useAuth } from '@clerk/clerk-react'
 import { motion } from 'framer-motion'
 import ReactConfetti from 'react-confetti'
 import OnboardingFlow from '../components/onboarding/OnboardingFlow'
-import { generateTasks } from '../lib/taskEngine'
+import { generateTasks, getPhaseActuelle } from '../lib/taskEngine'
 import useAppStore from '../store/useAppStore'
 
 const messages = [
@@ -34,7 +34,7 @@ export default function Onboarding() {
       const profileData = {
         ...onboardingAnswers,
         onboarding_done: true,
-        phase_actuelle: 1,
+        phase_actuelle: getPhaseActuelle(onboardingAnswers.etape_parcours, onboardingAnswers.type_immigrant),
       }
 
       const savedProfile = await fetch('/api/profile', {
