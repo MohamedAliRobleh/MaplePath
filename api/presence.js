@@ -16,10 +16,10 @@ export default async function handler(req, res) {
   }
 
   if (req.method === 'POST') {
-    const { date_debut, date_fin, pays, type, note } = req.body
+    const { date_debut, date_fin, pays, type } = req.body
     const rows = await sql`
-      INSERT INTO presence_days (user_id, date_debut, date_fin, pays, type, note)
-      VALUES (${userId}, ${date_debut}, ${date_fin}, ${pays || 'CA'}, ${type || 'presence'}, ${note})
+      INSERT INTO presence_days (user_id, date_debut, date_fin, pays, type)
+      VALUES (${userId}, ${date_debut}, ${date_fin}, ${pays || 'CA'}, ${type || 'absence'})
       RETURNING *
     `
     return res.status(201).json(rows[0])

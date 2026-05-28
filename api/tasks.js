@@ -52,7 +52,7 @@ export default async function handler(req, res) {
     const { id, complete, notes } = req.body
     const rows = await sql`
       UPDATE checklist_items
-      SET complete = ${complete}, complete_at = ${complete ? new Date().toISOString() : null}, notes = COALESCE(${notes}, notes)
+      SET complete = ${complete}, completed_at = ${complete ? new Date().toISOString() : null}, notes = COALESCE(${notes}, notes)
       WHERE id = ${id} AND user_id = ${userId}
       RETURNING *
     `
