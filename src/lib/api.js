@@ -1,11 +1,12 @@
 import { useAuth } from '@clerk/clerk-react'
 
 async function apiFetch(path, options = {}, token) {
+  const resolvedToken = await token
   const res = await fetch(path, {
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      ...(resolvedToken ? { Authorization: `Bearer ${resolvedToken}` } : {}),
       ...options.headers,
     },
     body: options.body ? JSON.stringify(options.body) : undefined,
@@ -38,6 +39,5 @@ export function createApiClient(getToken) {
 
 export function useApi() {
   const { getToken } = useAuth()
-  const token = getToken()
-  return createApiClient(() => token)
+  return createApiClient(getToken)
 }

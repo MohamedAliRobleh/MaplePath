@@ -13,7 +13,7 @@ export function useChecklist() {
       try {
         const token = await getToken()
         const data = await fetch('/api/tasks', { headers: { Authorization: `Bearer ${token}` } }).then(r => r.json())
-        setTasks(data)
+        if (Array.isArray(data)) setTasks(data)
       } catch {}
       finally { setLoading(false) }
     }
