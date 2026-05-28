@@ -1,11 +1,13 @@
 import { motion } from 'framer-motion'
 import { MapPin, ChevronRight } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import ProgressBar from '../ui/ProgressBar'
 import useAppStore from '../../store/useAppStore'
 import { phases } from '../../data/tasks'
 
 export default function HeroCard() {
+  const { t } = useTranslation()
   const { profile, getUrgentTasks, getCompletionRate } = useAppStore()
   const navigate = useNavigate()
   const urgent = getUrgentTasks()
@@ -20,9 +22,9 @@ export default function HeroCard() {
     >
       <div className="flex items-start justify-between mb-4">
         <div>
-          <p className="font-body text-brand-800 text-sm font-medium">Bonjour 👋</p>
+          <p className="font-body text-brand-800 text-sm font-medium">{t('dashboard.hello')} 👋</p>
           <h2 className="font-display font-bold text-2xl text-brand-900 mt-0.5">
-            {profile?.prenom || 'Bienvenue'}
+            {profile?.prenom || 'MaplePath'}
           </h2>
         </div>
         {profile?.province && (
@@ -35,7 +37,9 @@ export default function HeroCard() {
 
       <div className="mb-4">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-xs font-medium text-brand-800">{phase?.label} · {pct}% complété</span>
+          <span className="text-xs font-medium text-brand-800">
+            {phase?.label} · {t('dashboard.progress', { pct })}
+          </span>
         </div>
         <ProgressBar value={pct} max={100} color="brand" className="[&>div>div]:bg-brand-700" />
       </div>
@@ -46,7 +50,7 @@ export default function HeroCard() {
           className="w-full flex items-center justify-between bg-brand-400/40 rounded-2xl px-4 py-3"
         >
           <span className="text-sm font-display font-semibold text-brand-900">
-            {urgent.length} tâche{urgent.length > 1 ? 's' : ''} urgente{urgent.length > 1 ? 's' : ''} aujourd'hui
+            {t('dashboard.urgentCount', { count: urgent.length })}
           </span>
           <ChevronRight size={16} className="text-brand-800" />
         </button>

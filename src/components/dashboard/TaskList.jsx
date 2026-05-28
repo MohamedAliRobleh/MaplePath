@@ -1,10 +1,12 @@
 import { motion } from 'framer-motion'
 import { ExternalLink } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import Badge from '../ui/Badge'
 import useAppStore from '../../store/useAppStore'
 import { useAuth } from '@clerk/clerk-react'
 
 export default function TaskList() {
+  const { t } = useTranslation()
   const { tasks, toggleTask } = useAppStore()
   const { getToken } = useAuth()
 
@@ -58,16 +60,16 @@ export default function TaskList() {
     )
   }
 
-  function Section({ title, items, badge }) {
+  function Section({ titleKey, items, badge }) {
     if (!items.length) return null
     return (
       <div className="mt-5 px-4">
         <div className="flex items-center gap-2 mb-3">
-          <h3 className="font-display font-bold text-base text-gray-900">{title}</h3>
+          <h3 className="font-display font-bold text-base text-gray-900">{t(titleKey)}</h3>
           {badge}
         </div>
         <div className="flex flex-col gap-2">
-          {items.map((t, i) => <TaskItem key={t.id} task={t} index={i} />)}
+          {items.map((task, i) => <TaskItem key={task.id} task={task} index={i} />)}
         </div>
       </div>
     )
@@ -76,16 +78,16 @@ export default function TaskList() {
   if (!tasks.length) return (
     <div className="mx-4 mt-6 p-6 bg-white rounded-3xl border border-black/5 text-center">
       <p className="text-4xl mb-2">📋</p>
-      <p className="font-display font-semibold text-gray-900">Aucune tâche pour l'instant</p>
-      <p className="text-sm text-gray-500 mt-1">Complète le sondage pour générer ton parcours</p>
+      <p className="font-display font-semibold text-gray-900">{t('dashboard.noTasks')}</p>
+      <p className="text-sm text-gray-500 mt-1">{t('dashboard.noTasksDesc')}</p>
     </div>
   )
 
   return (
     <>
-      <Section title="Urgent aujourd'hui" items={urgent} badge={<Badge variant="urgent">{urgent.length}</Badge>} />
-      <Section title="Cette semaine" items={week} badge={<Badge variant="warning">{week.length}</Badge>} />
-      <Section title="Ce mois" items={month} badge={<Badge variant="gray">{month.length}</Badge>} />
+      <Section titleKey="dashboard.urgent" items={urgent} badge={<Badge variant="urgent">{urgent.length}</Badge>} />
+      <Section titleKey="dashboard.week"   items={week}   badge={<Badge variant="warning">{week.length}</Badge>} />
+      <Section titleKey="dashboard.month"  items={month}  badge={<Badge variant="gray">{month.length}</Badge>} />
     </>
   )
 }

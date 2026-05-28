@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Check } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import Modal from '../ui/Modal'
 import useAppStore from '../../store/useAppStore'
 import { phases } from '../../data/tasks'
 
 export default function PhaseRoadmap() {
+  const { t } = useTranslation()
   const { profile, getTasksByPhase } = useAppStore()
   const currentPhase = profile?.phase_actuelle || 1
   const [modalPhase, setModalPhase] = useState(null)
@@ -13,7 +15,7 @@ export default function PhaseRoadmap() {
   return (
     <>
       <div className="mt-5 px-4">
-        <h3 className="font-display font-bold text-base text-gray-900 mb-3">Ton parcours</h3>
+        <h3 className="font-display font-bold text-base text-gray-900 mb-3">{t('dashboard.journey')}</h3>
         <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
           {phases.map((phase, i) => {
             const done = phase.id < currentPhase
@@ -43,10 +45,10 @@ export default function PhaseRoadmap() {
           <div>
             <p className="text-sm text-gray-500 mb-4">{modalPhase.description} · {modalPhase.days}</p>
             <div className="flex flex-col gap-2">
-              {getTasksByPhase(modalPhase.id).slice(0, 8).map(t => (
-                <div key={t.id} className={`flex items-center gap-3 p-3 rounded-2xl ${t.complete ? 'bg-green-50' : 'bg-gray-50'}`}>
-                  <div className={`w-2 h-2 rounded-full flex-shrink-0 ${t.complete ? 'bg-green-500' : t.priorite === 'urgent' ? 'bg-red-400' : 'bg-gray-300'}`} />
-                  <span className={`text-sm ${t.complete ? 'line-through text-gray-400' : 'text-gray-700'}`}>{t.titre}</span>
+              {getTasksByPhase(modalPhase.id).slice(0, 8).map(task => (
+                <div key={task.id} className={`flex items-center gap-3 p-3 rounded-2xl ${task.complete ? 'bg-green-50' : 'bg-gray-50'}`}>
+                  <div className={`w-2 h-2 rounded-full flex-shrink-0 ${task.complete ? 'bg-green-500' : task.priorite === 'urgent' ? 'bg-red-400' : 'bg-gray-300'}`} />
+                  <span className={`text-sm ${task.complete ? 'line-through text-gray-400' : 'text-gray-700'}`}>{task.titre}</span>
                 </div>
               ))}
             </div>
