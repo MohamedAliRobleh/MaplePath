@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Inter', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-[#FAFAF8] text-[#0A0A0A] antialiased;
+    max-width: 430px;
+    margin: 0 auto;
+    min-height: 100dvh;
+  }
+}
+
+@layer components {
+  .font-display { font-family: 'Plus Jakarta Sans', sans-serif; }
+}
+
+/* Safe area for iPhone notch */
+.safe-bottom { padding-bottom: env(safe-area-inset-bottom, 0px); }
+.safe-top    { padding-top: env(safe-area-inset-top, 0px); }
+
+/* RTL support */
+[dir="rtl"] { font-family: 'Inter', sans-serif; }
