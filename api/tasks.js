@@ -27,7 +27,7 @@ export default async function handler(req, res) {
       titre: t.titre,
       description: t.description || null,
       categorie: t.categorie || null,
-      phase: t.phase || 1,
+      phase: t.phase ?? 1,
       priorite: t.priorite || 'normal',
       jour_cible: t.jour_cible || null,
       lien_officiel: t.lien_officiel || null,
