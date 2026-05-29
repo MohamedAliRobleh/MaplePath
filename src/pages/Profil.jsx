@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth, useUser } from '@clerk/clerk-react'
 import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
+import i18n from '../lib/i18n'
 import { LogOut, ChevronRight, Globe, RefreshCw } from 'lucide-react'
 import Button from '../components/ui/Button'
 import Card from '../components/ui/Card'
@@ -29,6 +30,7 @@ export default function Profil() {
 
   async function handleLangueChange(lang) {
     setLangue(lang)
+    i18n.changeLanguage(lang)
     try {
       const token = await getToken()
       await fetch('/api/profile', {

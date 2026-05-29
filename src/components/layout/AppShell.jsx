@@ -4,10 +4,15 @@ import { useNavigate } from 'react-router-dom'
 import TopBar from './TopBar'
 import BottomNav from './BottomNav'
 import useAppStore from '../../store/useAppStore'
+import i18n from '../../lib/i18n'
 
 export default function AppShell({ children }) {
   const { userId, getToken, isLoaded } = useAuth()
-  const { profile, setProfile, setTasks } = useAppStore()
+  const { profile, setProfile, setTasks, langue } = useAppStore()
+
+  useEffect(() => {
+    if (langue && i18n.language !== langue) i18n.changeLanguage(langue)
+  }, [langue])
   const navigate = useNavigate()
 
   useEffect(() => {
