@@ -116,7 +116,7 @@ export default function Checklist() {
         <div className="flex items-center gap-2 bg-gray-50 rounded-2xl px-4 py-3 mb-4">
           <ArrowRight size={14} className="text-gray-400 flex-shrink-0" />
           <p className="text-xs text-gray-500">
-            Prochaine étape après cette phase :{' '}
+            {t('checklist.nextStepLabel')}{' '}
             <span className="font-semibold text-gray-700">{nextPhase.icon} {nextPhase.label}</span>
           </p>
         </div>
@@ -156,7 +156,7 @@ export default function Checklist() {
                 <p className="text-xs text-brand-900/60 mt-0.5">
                   {phases.find(p => p.id === activePhase)?.icon}{' '}
                   {phases.find(p => p.id === activePhase)?.label}
-                  {' · '}{phaseTasks.length} tâches
+                  {' · '}{t('checklist.taskCount', { count: phaseTasks.length })}
                 </p>
               </div>
             </div>

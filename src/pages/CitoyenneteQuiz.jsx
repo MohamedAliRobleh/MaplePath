@@ -3,12 +3,14 @@ import { motion, AnimatePresence } from 'framer-motion'
 import ReactConfetti from 'react-confetti'
 import { useAuth } from '@clerk/clerk-react'
 import { Timer, CheckCircle, XCircle, RotateCcw } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import Button from '../components/ui/Button'
 import Badge from '../components/ui/Badge'
 import ProgressBar from '../components/ui/ProgressBar'
 import { getRandomQuestions, categoriesQuiz } from '../data/quiz'
 
 export default function CitoyenneteQuiz() {
+  const { t } = useTranslation()
   const { getToken } = useAuth()
   const [mode, setMode] = useState(null) // null | 'practice' | 'exam'
   const [questions, setQuestions] = useState([])
@@ -79,8 +81,8 @@ export default function CitoyenneteQuiz() {
 
   if (!mode) return (
     <div className="px-4 py-6">
-      <h2 className="font-display font-bold text-2xl text-gray-900 mb-2">Quiz Citoyenneté</h2>
-      <p className="text-gray-500 text-sm mb-6">100 questions basées sur «Découvrir le Canada»</p>
+      <h2 className="font-display font-bold text-2xl text-gray-900 mb-2">{t('quiz.title')}</h2>
+      <p className="text-gray-500 text-sm mb-6">{t('quiz.subtitle')}</p>
       <div className="grid grid-cols-2 gap-2 mb-6">
         {Object.entries(categoriesQuiz).map(([key, cat]) => (
           <div key={key} className="p-3 bg-white rounded-3xl border border-black/5 shadow-card">
@@ -90,12 +92,8 @@ export default function CitoyenneteQuiz() {
         ))}
       </div>
       <div className="flex flex-col gap-3">
-        <Button onClick={() => startMode('practice')} fullWidth>
-          🎯 Mode pratique — 10 questions
-        </Button>
-        <Button variant="secondary" onClick={() => startMode('exam')} fullWidth>
-          📝 Mode examen — 20 questions · 30min
-        </Button>
+        <Button onClick={() => startMode('practice')} fullWidth>{t('quiz.practiceBtn')}</Button>
+        <Button variant="secondary" onClick={() => startMode('exam')} fullWidth>{t('quiz.examBtn')}</Button>
       </div>
     </div>
   )
@@ -109,13 +107,13 @@ export default function CitoyenneteQuiz() {
           {passed ? <CheckCircle size={40} className="text-green-500" /> : <XCircle size={40} className="text-red-400" />}
         </div>
         <h3 className="font-display font-bold text-3xl text-gray-900">{score}/{questions.length}</h3>
-        <p className="text-gray-500 mt-1">{pct}% — {passed ? '🎉 Réussi !' : 'Continue à étudier'}</p>
+        <p className="text-gray-500 mt-1">{pct}% — {passed ? t('quiz.passed') : t('quiz.failed')}</p>
         <div className="mt-6 mb-6">
           <ProgressBar value={score} max={questions.length} color={passed ? 'green' : 'red'} showLabel />
         </div>
         {!passed && (
           <div className="mb-6 text-left">
-            <h4 className="font-display font-semibold text-sm text-gray-700 mb-2">Questions à revoir :</h4>
+            <h4 className="font-display font-semibold text-sm text-gray-700 mb-2">{t('quiz.toReview')}</h4>
             <div className="flex flex-col gap-2">
               {answers.filter(a => !a.correct).slice(0, 5).map(a => {
                 const q = questions.find(q => q.id === a.questionId)
@@ -127,7 +125,7 @@ export default function CitoyenneteQuiz() {
           </div>
         )}
         <Button onClick={() => setMode(null)} fullWidth>
-          <RotateCcw size={16} className="mr-2 inline" /> Recommencer
+          <RotateCcw size={16} className="mr-2 inline" /> {t('quiz.restart')}
         </Button>
       </div>
     )

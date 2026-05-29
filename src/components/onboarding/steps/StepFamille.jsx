@@ -1,15 +1,17 @@
 import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 import useAppStore from '../../../store/useAppStore'
 
-const situations = [
-  { code: 'seul',              icon: '👤', label: 'Seul(e)' },
-  { code: 'couple',            icon: '👫', label: 'En couple (sans enfants)' },
-  { code: 'famille_jeunes',    icon: '👨‍👩‍👶', label: 'Famille — enfants 0–5 ans' },
-  { code: 'famille_scolaires', icon: '👨‍👩‍👧‍👦', label: 'Famille — enfants 6–17 ans' },
-  { code: 'parent_seul',       icon: '👩‍👦', label: 'Parent seul' },
+const FAM_CODES = [
+  { code: 'seul',              icon: '👤' },
+  { code: 'couple',            icon: '👫' },
+  { code: 'famille_jeunes',    icon: '👨‍👩‍👶' },
+  { code: 'famille_scolaires', icon: '👨‍👩‍👧‍👦' },
+  { code: 'parent_seul',       icon: '👩‍👦' },
 ]
 
 export default function StepFamille({ onNext }) {
+  const { t } = useTranslation()
   const { onboardingAnswers, setAnswer } = useAppStore()
   const selected = onboardingAnswers.situation_fam
 
@@ -20,10 +22,10 @@ export default function StepFamille({ onNext }) {
 
   return (
     <div className="px-4 py-6">
-      <h2 className="font-display font-bold text-2xl text-gray-900 mb-2">Quelle est ta situation familiale ?</h2>
-      <p className="text-gray-500 text-sm mb-6">Pour personnaliser tes tâches liées à la famille.</p>
+      <h2 className="font-display font-bold text-2xl text-gray-900 mb-2">{t('onboarding.familleQ')}</h2>
+      <p className="text-gray-500 text-sm mb-6">{t('onboarding.familleSub')}</p>
       <div className="flex flex-col gap-3">
-        {situations.map((s, i) => (
+        {FAM_CODES.map((s, i) => (
           <motion.button
             key={s.code}
             initial={{ opacity: 0, y: 16 }}
@@ -35,7 +37,7 @@ export default function StepFamille({ onNext }) {
               ${selected === s.code ? 'border-brand-300 bg-brand-50' : 'border-gray-100 bg-white hover:border-gray-200'}`}
           >
             <span className="text-3xl">{s.icon}</span>
-            <span className="font-display font-semibold text-base text-gray-900">{s.label}</span>
+            <span className="font-display font-semibold text-base text-gray-900">{t(`onboarding.fam_${s.code}`)}</span>
           </motion.button>
         ))}
       </div>

@@ -10,6 +10,7 @@ import {
 } from '../data/ressources'
 
 function Section({ title, icon, count, children, defaultOpen = false, sectionKey, activeSection }) {
+  const { t } = useTranslation()
   const [open, setOpen] = useState(defaultOpen || sectionKey === activeSection)
   return (
     <div className="mb-3">
@@ -21,7 +22,7 @@ function Section({ title, icon, count, children, defaultOpen = false, sectionKey
           <span className="text-2xl">{icon}</span>
           <div className="text-left">
             <p className="font-display font-bold text-sm text-gray-900">{title}</p>
-            <p className="text-xs text-gray-400">{count} options disponibles</p>
+            <p className="text-xs text-gray-400">{t('outils.available', { count })}</p>
           </div>
         </div>
         {open
@@ -89,27 +90,27 @@ export default function Outils() {
       <h2 className="font-display font-bold text-2xl text-gray-900 mb-1">{t('outils.title')}</h2>
       <p className="text-sm text-gray-500 mb-5">{t('outils.subtitle')}</p>
 
-      <Section title="Transport" icon="🚌" count={transport.length} sectionKey="transport" activeSection={activeSection}>
+      <Section title={t('outils.sectionTransport')} icon="🚌" count={transport.length} sectionKey="transport" activeSection={activeSection}>
         {transport.map(item => <ResourceCard key={item.nom} {...item} />)}
       </Section>
 
-      <Section title="Carte SIM" icon="📱" count={carteSim.length} sectionKey="sim" activeSection={activeSection}>
+      <Section title={t('outils.sectionSim')} icon="📱" count={carteSim.length} sectionKey="sim" activeSection={activeSection}>
         {carteSim.map(item => <ResourceCard key={item.nom} {...item} />)}
       </Section>
 
-      <Section title="Banques pour Nouveaux Arrivants" icon="🏦" count={banques.length} defaultOpen sectionKey="banque" activeSection={activeSection}>
+      <Section title={t('outils.sectionBanks')} icon="🏦" count={banques.length} defaultOpen sectionKey="banque" activeSection={activeSection}>
         {banques.map(item => <ResourceCard key={item.nom} {...item} />)}
       </Section>
 
-      <Section title="Trouver un Logement" icon="🏠" count={logement.length} sectionKey="logement" activeSection={activeSection}>
+      <Section title={t('outils.sectionHousing')} icon="🏠" count={logement.length} sectionKey="logement" activeSection={activeSection}>
         {logement.map(item => <ResourceCard key={item.nom} {...item} />)}
       </Section>
 
-      <Section title="Trouver un Emploi" icon="💼" count={emploi.length} sectionKey="emploi" activeSection={activeSection}>
+      <Section title={t('outils.sectionJobs')} icon="💼" count={emploi.length} sectionKey="emploi" activeSection={activeSection}>
         {emploi.map(item => <ResourceCard key={item.nom} {...item} />)}
       </Section>
 
-      <Section title="Trouver un Médecin" icon="🏥" count={medecin.length} sectionKey="sante" activeSection={activeSection}>
+      <Section title={t('outils.sectionDoctor')} icon="🏥" count={medecin.length} sectionKey="sante" activeSection={activeSection}>
         <div className="flex flex-col gap-2">
           {medecin.map(item => (
             <a
@@ -130,11 +131,11 @@ export default function Outils() {
         </div>
       </Section>
 
-      <Section title="Assurances" icon="🛡️" count={assurances.length} sectionKey="assurances" activeSection={activeSection}>
+      <Section title={t('outils.sectionInsurance')} icon="🛡️" count={assurances.length} sectionKey="assurances" activeSection={activeSection}>
         {assurances.map(item => <ResourceCard key={item.nom} {...item} />)}
       </Section>
 
-      <Section title="Cours de Langue" icon="🗣️" count={coursLangue.length} sectionKey="langue" activeSection={activeSection}>
+      <Section title={t('outils.sectionLanguage')} icon="🗣️" count={coursLangue.length} sectionKey="langue" activeSection={activeSection}>
         {coursLangue.map(c => (
           <div key={c.nom} className="bg-white rounded-3xl border border-black/5 shadow-card p-4">
             <div className="flex items-start justify-between">
@@ -160,7 +161,7 @@ export default function Outils() {
         ))}
       </Section>
 
-      <Section title="Aide Gouvernementale" icon="🍁" count={aideGouvernementale.length} sectionKey="aide" activeSection={activeSection}>
+      <Section title={t('outils.sectionGovAid')} icon="🍁" count={aideGouvernementale.length} sectionKey="aide" activeSection={activeSection}>
         {aideGouvernementale.map(a => (
           <div key={a.nom} className="bg-white rounded-3xl border border-black/5 shadow-card p-4">
             <div className="flex items-start justify-between gap-3">
@@ -181,7 +182,7 @@ export default function Outils() {
         ))}
       </Section>
 
-      <Section title="Formulaires IRCC" icon="📄" count={formulairesIRCC.length} sectionKey="documents" activeSection={activeSection}>
+      <Section title={t('outils.sectionIRCC')} icon="📄" count={formulairesIRCC.length} sectionKey="documents" activeSection={activeSection}>
         {formulairesIRCC.map(f => (
           <div key={f.code} className="bg-white rounded-3xl border border-black/5 shadow-card p-4">
             <div className="flex items-center gap-3">

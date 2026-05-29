@@ -55,8 +55,8 @@ export default function TaskList() {
           <>
             <div className="flex items-center justify-between mb-3">
               <div>
-                <h3 className="font-display font-bold text-base text-gray-900">Étape en cours</h3>
-                <p className="text-xs text-gray-400 mt-0.5">{phaseName} · {pending.length} tâche{pending.length > 1 ? 's' : ''}</p>
+                <h3 className="font-display font-bold text-base text-gray-900">{t('dashboard.currentStep')}</h3>
+                <p className="text-xs text-gray-400 mt-0.5">{phaseName} · {t('dashboard.taskCount', { count: pending.length })}</p>
               </div>
             </div>
 
@@ -91,8 +91,8 @@ export default function TaskList() {
           phaseTasks.length > 0 && (
             <div className="text-center py-10">
               <p className="text-4xl mb-2">✅</p>
-              <p className="font-display font-bold text-gray-900">Phase terminée !</p>
-              <p className="text-sm text-gray-400 mt-1">Valide ton étape dans la Checklist</p>
+              <p className="font-display font-bold text-gray-900">{t('dashboard.phaseDone')}</p>
+              <p className="text-sm text-gray-400 mt-1">{t('dashboard.validateInChecklist')}</p>
             </div>
           )
         )}

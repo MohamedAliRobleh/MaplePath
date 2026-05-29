@@ -1,16 +1,18 @@
 import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 import useAppStore from '../../../store/useAppStore'
 
-const etapes = [
-  { code: 'pre_arrivee',  icon: '✈️',  label: "Je n'ai pas encore atterri",  desc: "Préparation depuis l'étranger" },
-  { code: 'semaine_1',    icon: '📍',  label: "Je viens d'arriver",           desc: '0 à 7 jours' },
-  { code: 'mois_1',       icon: '📅',  label: 'Quelques semaines',            desc: '1 à 4 semaines' },
-  { code: 'mois_3',       icon: '🗓️',  label: 'Quelques mois',               desc: '1 à 6 mois' },
-  { code: 'an_1',         icon: '📆',  label: "Plus d'un an",                 desc: 'Plus de 6 mois' },
-  { code: 'citoyennete',  icon: '🏛️',  label: 'Je prépare ma citoyenneté',   desc: 'Résidence permanente établie' },
+const ETAPE_CODES = [
+  { code: 'pre_arrivee', icon: '✈️' },
+  { code: 'semaine_1',   icon: '📍' },
+  { code: 'mois_1',      icon: '📅' },
+  { code: 'mois_3',      icon: '🗓️' },
+  { code: 'an_1',        icon: '📆' },
+  { code: 'citoyennete', icon: '🏛️' },
 ]
 
 export default function StepEtape({ onNext }) {
+  const { t } = useTranslation()
   const { onboardingAnswers, setAnswer } = useAppStore()
   const selected = onboardingAnswers.etape_parcours
 
@@ -21,10 +23,10 @@ export default function StepEtape({ onNext }) {
 
   return (
     <div className="px-4 py-6">
-      <h2 className="font-display font-bold text-2xl text-gray-900 mb-2">À quelle étape de ton parcours es-tu ?</h2>
-      <p className="text-gray-500 text-sm mb-6">Nous adapterons tes tâches prioritaires.</p>
+      <h2 className="font-display font-bold text-2xl text-gray-900 mb-2">{t('onboarding.etapeQ')}</h2>
+      <p className="text-gray-500 text-sm mb-6">{t('onboarding.etapeSub')}</p>
       <div className="flex flex-col gap-3">
-        {etapes.map((e, i) => (
+        {ETAPE_CODES.map((e, i) => (
           <motion.button
             key={e.code}
             initial={{ opacity: 0, x: 20 }}
@@ -37,8 +39,8 @@ export default function StepEtape({ onNext }) {
           >
             <span className="text-2xl">{e.icon}</span>
             <div>
-              <p className="font-display font-semibold text-sm text-gray-900">{e.label}</p>
-              <p className="text-xs text-gray-500">{e.desc}</p>
+              <p className="font-display font-semibold text-sm text-gray-900">{t(`onboarding.etape_${e.code}`)}</p>
+              <p className="text-xs text-gray-500">{t(`onboarding.etape_${e.code}_desc`)}</p>
             </div>
           </motion.button>
         ))}
