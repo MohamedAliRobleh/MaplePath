@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { taskCategories } from '../../data/tasks'
 import {
   banques, transport, medecin, assurances, emploi,
-  logement, coursLangue, formulairesIRCC, aideGouvernementale,
+  logement, coursLangue, formulairesIRCC, aideGouvernementale, carteSim,
 } from '../../data/ressources'
 
 const CAT_ICONS = {
@@ -33,6 +33,19 @@ const CAT_BG = {
   juridique:    'bg-red-50',
 }
 
+const CAT_SECTION = {
+  banque:       'banque',
+  sante:        'sante',
+  transport:    'transport',
+  emploi:       'emploi',
+  logement:     'logement',
+  langue:       'langue',
+  documents:    'documents',
+  installation: 'sim',
+  juridique:    'aide',
+  education:    'aide',
+}
+
 function getResources(categorie) {
   const map = {
     banque:       banques.slice(0, 4),
@@ -42,9 +55,9 @@ function getResources(categorie) {
     logement:     logement.slice(0, 4),
     langue:       coursLangue.slice(0, 4),
     documents:    formulairesIRCC.slice(0, 4),
-    installation: aideGouvernementale.slice(0, 4),
+    installation: carteSim.slice(0, 4),
     juridique:    aideGouvernementale.slice(0, 3),
-    education:    [...aideGouvernementale.slice(0, 2)],
+    education:    aideGouvernementale.slice(0, 2),
   }
   return map[categorie] || []
 }
@@ -157,7 +170,7 @@ export default function TaskDetailSheet({ task, onClose }) {
                   <div className="flex items-center justify-between mb-3">
                     <h3 className="font-display font-bold text-sm text-gray-900">Ressources associées</h3>
                     <button
-                      onClick={() => { onClose(); navigate('/outils') }}
+                      onClick={() => { onClose(); navigate(`/outils?section=${CAT_SECTION[task.categorie] || ''}`) }}
                       className="flex items-center gap-0.5 text-xs font-semibold text-brand-700"
                     >
                       Voir tout <ChevronRight size={13} />

@@ -2,14 +2,15 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ExternalLink, ChevronDown, ChevronUp } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
+import { useSearchParams } from 'react-router-dom'
 import Badge from '../components/ui/Badge'
 import {
   transport, carteSim, banques, logement, emploi,
   medecin, assurances, formulairesIRCC, coursLangue, aideGouvernementale,
 } from '../data/ressources'
 
-function Section({ title, icon, count, children, defaultOpen = false }) {
-  const [open, setOpen] = useState(defaultOpen)
+function Section({ title, icon, count, children, defaultOpen = false, sectionKey, activeSection }) {
+  const [open, setOpen] = useState(defaultOpen || sectionKey === activeSection)
   return (
     <div className="mb-3">
       <button
@@ -80,32 +81,35 @@ function ResourceCard({ nom, description, prix, avantages, badge, lien, programm
 
 export default function Outils() {
   const { t } = useTranslation()
+  const [searchParams] = useSearchParams()
+  const activeSection = searchParams.get('section') || ''
+
   return (
     <div className="px-4 py-4 pb-6">
       <h2 className="font-display font-bold text-2xl text-gray-900 mb-1">{t('outils.title')}</h2>
       <p className="text-sm text-gray-500 mb-5">{t('outils.subtitle')}</p>
 
-      <Section title="Transport" icon="🚌" count={transport.length}>
+      <Section title="Transport" icon="🚌" count={transport.length} sectionKey="transport" activeSection={activeSection}>
         {transport.map(item => <ResourceCard key={item.nom} {...item} />)}
       </Section>
 
-      <Section title="Carte SIM" icon="📱" count={carteSim.length}>
+      <Section title="Carte SIM" icon="📱" count={carteSim.length} sectionKey="sim" activeSection={activeSection}>
         {carteSim.map(item => <ResourceCard key={item.nom} {...item} />)}
       </Section>
 
-      <Section title="Banques pour Nouveaux Arrivants" icon="🏦" count={banques.length} defaultOpen>
+      <Section title="Banques pour Nouveaux Arrivants" icon="🏦" count={banques.length} defaultOpen sectionKey="banque" activeSection={activeSection}>
         {banques.map(item => <ResourceCard key={item.nom} {...item} />)}
       </Section>
 
-      <Section title="Trouver un Logement" icon="🏠" count={logement.length}>
+      <Section title="Trouver un Logement" icon="🏠" count={logement.length} sectionKey="logement" activeSection={activeSection}>
         {logement.map(item => <ResourceCard key={item.nom} {...item} />)}
       </Section>
 
-      <Section title="Trouver un Emploi" icon="💼" count={emploi.length}>
+      <Section title="Trouver un Emploi" icon="💼" count={emploi.length} sectionKey="emploi" activeSection={activeSection}>
         {emploi.map(item => <ResourceCard key={item.nom} {...item} />)}
       </Section>
 
-      <Section title="Trouver un Médecin" icon="🏥" count={medecin.length}>
+      <Section title="Trouver un Médecin" icon="🏥" count={medecin.length} sectionKey="sante" activeSection={activeSection}>
         <div className="flex flex-col gap-2">
           {medecin.map(item => (
             <a
@@ -126,11 +130,11 @@ export default function Outils() {
         </div>
       </Section>
 
-      <Section title="Assurances" icon="🛡️" count={assurances.length}>
+      <Section title="Assurances" icon="🛡️" count={assurances.length} sectionKey="assurances" activeSection={activeSection}>
         {assurances.map(item => <ResourceCard key={item.nom} {...item} />)}
       </Section>
 
-      <Section title="Cours de Langue" icon="🗣️" count={coursLangue.length}>
+      <Section title="Cours de Langue" icon="🗣️" count={coursLangue.length} sectionKey="langue" activeSection={activeSection}>
         {coursLangue.map(c => (
           <div key={c.nom} className="bg-white rounded-3xl border border-black/5 shadow-card p-4">
             <div className="flex items-start justify-between">
@@ -156,7 +160,7 @@ export default function Outils() {
         ))}
       </Section>
 
-      <Section title="Aide Gouvernementale" icon="🍁" count={aideGouvernementale.length}>
+      <Section title="Aide Gouvernementale" icon="🍁" count={aideGouvernementale.length} sectionKey="aide" activeSection={activeSection}>
         {aideGouvernementale.map(a => (
           <div key={a.nom} className="bg-white rounded-3xl border border-black/5 shadow-card p-4">
             <div className="flex items-start justify-between gap-3">
@@ -177,7 +181,7 @@ export default function Outils() {
         ))}
       </Section>
 
-      <Section title="Formulaires IRCC" icon="📄" count={formulairesIRCC.length}>
+      <Section title="Formulaires IRCC" icon="📄" count={formulairesIRCC.length} sectionKey="documents" activeSection={activeSection}>
         {formulairesIRCC.map(f => (
           <div key={f.code} className="bg-white rounded-3xl border border-black/5 shadow-card p-4">
             <div className="flex items-center gap-3">
