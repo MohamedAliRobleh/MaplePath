@@ -4,7 +4,7 @@ import { initReactI18next } from 'react-i18next'
 const resources = {
   fr: {
     translation: {
-      welcome: { title: "De l'aéroport à la citoyenneté", cta: 'Commencer — 2 min', signin: "J'ai déjà un compte" },
+      welcome: { title: "De l'aéroport à la citoyenneté", cta: 'Commencer — 2 min', signin: "J'ai déjà un compte", f1Title: 'Parcours personnalisé', f1Desc: 'Adapté à ton profil, ta province et ta situation', f2Title: 'Checklists intelligentes', f2Desc: '30+ tâches générées automatiquement selon tes priorités', f3Title: 'Quiz citoyenneté', f3Desc: '100 questions officielles pour préparer ton test' },
       nav: { home: 'Accueil', checklist: 'Checklist', tools: 'Outils', quiz: 'Quiz', profile: 'Profil' },
       onboarding: { step: 'Étape {{current}} sur {{total}}', next: 'Suivant', back: 'Retour', generating: 'Génération de ton parcours...', done: 'Ton parcours est prêt !' },
       dashboard: {
@@ -47,7 +47,7 @@ const resources = {
   },
   en: {
     translation: {
-      welcome: { title: 'From the airport to citizenship', cta: 'Get Started — 2 min', signin: 'I already have an account' },
+      welcome: { title: 'From the airport to citizenship', cta: 'Get Started — 2 min', signin: 'I already have an account', f1Title: 'Personalized journey', f1Desc: 'Adapted to your profile, province and situation', f2Title: 'Smart checklists', f2Desc: '30+ tasks generated automatically based on your priorities', f3Title: 'Citizenship quiz', f3Desc: '100 official questions to prepare your test' },
       nav: { home: 'Home', checklist: 'Checklist', tools: 'Tools', quiz: 'Quiz', profile: 'Profile' },
       onboarding: { step: 'Step {{current}} of {{total}}', next: 'Next', back: 'Back', generating: 'Generating your journey...', done: 'Your journey is ready!' },
       dashboard: {
@@ -90,7 +90,7 @@ const resources = {
   },
   ar: {
     translation: {
-      welcome: { title: 'من المطار إلى الجنسية', cta: 'ابدأ الآن - دقيقتان', signin: 'لدي حساب بالفعل' },
+      welcome: { title: 'من المطار إلى الجنسية', cta: 'ابدأ الآن - دقيقتان', signin: 'لدي حساب بالفعل', f1Title: 'مسار شخصي', f1Desc: 'مُكيَّف مع ملفك الشخصي ومقاطعتك ووضعك', f2Title: 'قوائم ذكية', f2Desc: 'أكثر من 30 مهمة تُنشأ تلقائياً وفق أولوياتك', f3Title: 'اختبار الجنسية', f3Desc: '100 سؤال رسمي للتحضير لاختبارك' },
       nav: { home: 'الرئيسية', checklist: 'قائمة', tools: 'أدوات', quiz: 'اختبار', profile: 'الملف' },
       onboarding: { step: 'الخطوة {{current}} من {{total}}', next: 'التالي', back: 'رجوع', generating: 'جاري إنشاء مسارك...', done: 'مسارك جاهز!' },
       dashboard: {
@@ -133,7 +133,7 @@ const resources = {
   },
   es: {
     translation: {
-      welcome: { title: 'Del aeropuerto a la ciudadanía', cta: 'Empezar — 2 min', signin: 'Ya tengo una cuenta' },
+      welcome: { title: 'Del aeropuerto a la ciudadanía', cta: 'Empezar — 2 min', signin: 'Ya tengo una cuenta', f1Title: 'Recorrido personalizado', f1Desc: 'Adaptado a tu perfil, provincia y situación', f2Title: 'Listas inteligentes', f2Desc: '30+ tareas generadas automáticamente según tus prioridades', f3Title: 'Quiz de ciudadanía', f3Desc: '100 preguntas oficiales para preparar tu examen' },
       nav: { home: 'Inicio', checklist: 'Lista', tools: 'Herramientas', quiz: 'Quiz', profile: 'Perfil' },
       onboarding: { step: 'Paso {{current}} de {{total}}', next: 'Siguiente', back: 'Atrás', generating: 'Generando tu recorrido...', done: '¡Tu recorrido está listo!' },
       dashboard: {

@@ -2,16 +2,12 @@ import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { SignInButton, SignUpButton, useAuth } from '@clerk/clerk-react'
 import { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { MapPin, CheckSquare, HelpCircle } from 'lucide-react'
 import Button from '../components/ui/Button'
 import Logo from '../components/ui/Logo'
 import useAppStore from '../store/useAppStore'
-
-const features = [
-  { icon: MapPin,       title: 'Parcours personnalisé',    desc: 'Adapté à ton profil, ta province et ta situation' },
-  { icon: CheckSquare,  title: 'Checklists intelligentes', desc: '30+ tâches générées automatiquement selon tes priorités' },
-  { icon: HelpCircle,   title: 'Quiz citoyenneté',         desc: '100 questions officielles pour préparer ton test' },
-]
+import i18n from '../lib/i18n'
 
 const langues = [
   { code: 'fr', label: '🇫🇷 FR' },
@@ -21,6 +17,7 @@ const langues = [
 ]
 
 export default function Welcome() {
+  const { t } = useTranslation()
   const { isSignedIn } = useAuth()
   const { profile, langue, setLangue } = useAppStore()
   const navigate = useNavigate()
@@ -30,11 +27,22 @@ export default function Welcome() {
     else if (isSignedIn) navigate('/onboarding')
   }, [isSignedIn])
 
+  function handleLangue(code) {
+    setLangue(code)
+    i18n.changeLanguage(code)
+  }
+
+  const features = [
+    { icon: MapPin,      title: t('welcome.f1Title'), desc: t('welcome.f1Desc') },
+    { icon: CheckSquare, title: t('welcome.f2Title'), desc: t('welcome.f2Desc') },
+    { icon: HelpCircle,  title: t('welcome.f3Title'), desc: t('welcome.f3Desc') },
+  ]
+
   return (
     <div className="min-h-screen bg-white flex flex-col px-4 pt-8 pb-8">
       <div className="flex justify-end gap-2 mb-8">
         {langues.map(l => (
-          <button key={l.code} onClick={() => setLangue(l.code)}
+          <button key={l.code} onClick={() => handleLangue(l.code)}
             className={`text-xs font-medium px-2 py-1 rounded-lg transition-all
               ${langue === l.code ? 'text-brand-700 bg-brand-50 font-semibold' : 'text-gray-400 hover:text-gray-700 hover:bg-gray-50'}`}>
             {l.label}
@@ -51,7 +59,7 @@ export default function Welcome() {
           <h1 className="font-display font-bold text-4xl text-gray-900 leading-tight">
             Maple<span className="text-brand-300">Path</span>
           </h1>
-          <p className="text-gray-500 text-lg mt-2 mb-8">De l'aéroport à la citoyenneté</p>
+          <p className="text-gray-500 text-lg mt-2 mb-8">{t('welcome.title')}</p>
         </motion.div>
 
         <div className="w-full flex flex-col gap-3 mb-8">
@@ -79,10 +87,10 @@ export default function Welcome() {
         className="flex flex-col gap-3"
       >
         <SignUpButton mode="modal" afterSignUpUrl="/onboarding">
-          <Button fullWidth>Commencer — 2 min</Button>
+          <Button fullWidth>{t('welcome.cta')}</Button>
         </SignUpButton>
         <SignInButton mode="modal" afterSignInUrl="/dashboard">
-          <Button variant="secondary" fullWidth>J'ai déjà un compte</Button>
+          <Button variant="secondary" fullWidth>{t('welcome.signin')}</Button>
         </SignInButton>
       </motion.div>
     </div>
